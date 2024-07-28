@@ -1,6 +1,28 @@
 local lush = require('lush')
 local hsl = lush.hsl
 
+-- >>> 100 * 0.44
+-- 44.0
+-- >>> 100 * 0.44 * 0.1
+-- 4.4
+-- >>> 100 * 0.66
+-- 66.0
+-- >>> 100 * 0.66 * 0.9
+-- 59.4
+-- >>> 100 * 0.66 * 0.9 * 0.9
+-- 53.46
+-- >>> 100 * 1.1
+-- 110.00000000000001
+-- >>> 100 - 53.46
+-- 46.54
+-- >>> 100 * 1.1
+-- 110.00000000000001
+-- >>> 110 * 46.54
+-- 5119.4
+-- >>> 110 * 0.4654
+-- 51.193999999999996
+local MAGIC_NUMBER = 51.193999999999996
+
 local palette = {
     whitespace = hsl("#1e1e28"),
 
@@ -516,32 +538,32 @@ local theme = lush(function(injected_functions)
     CmpItemKindDefault     { MsgArea },
     CmpItemMenu            { MsgArea },
 
-    CmpItemKindText          { Normal,                bg = Normal.fg.li(10).da(44),                gui = "standout" },
-    CmpItemKindMethod        { sym"@method",          bg = sym"@method".fg.li(10).da(44),          gui = "standout" },
-    CmpItemKindFunction      { Function,              bg = Function.fg.li(10).da(44),              gui = "standout" },
-    CmpItemKindConstructor   { sym"@constructor",     bg = sym"@constructor".fg.li(10).da(44),     gui = "standout" },
-    CmpItemKindField         { sym"@variable.member", bg = sym"@variable.member".fg.li(10).da(44), gui = "standout" },
-    CmpItemKindVariable      { MsgArea,               bg = MsgArea.fg.li(10).da(44),               gui = "standout" },
-    CmpItemKindClass         { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindInterface     { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindModule        { sym"@module",          bg = sym"@module".fg.li(10).da(44),          gui = "standout" },
-    CmpItemKindProperty      { sym"@property",        bg = sym"@property".fg.li(10).da(44),        gui = "standout" },
-    CmpItemKindUnit          { Number,                bg = Number.fg.li(10).da(44),                gui = "standout" },
-    CmpItemKindValue         { String,                bg = String.fg.li(10).da(44),                gui = "standout" },
-    CmpItemKindEnum          { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindKeyword       { Keyword,               bg = Keyword.fg.li(10).da(44),               gui = "standout" },
-    CmpItemKindSnippet       { Special,               bg = Special.fg.li(10).da(44),               gui = "standout" },
-    CmpItemKindColor         { Special,               bg = Special.fg.li(10).da(44),               gui = "standout" },
-    CmpItemKindFile          { Directory,             bg = Directory.fg.li(10).da(44),             gui = "standout" },
-    CmpItemKindReference     { Special,               bg = Special.fg.li(10).da(44),               gui = "standout" },
-    CmpItemKindFolder        { Directory,             bg = Directory.fg.li(10).da(44),             gui = "standout" },
-    CmpItemKindEnumMember    { Constant,              bg = Constant.fg.li(10).da(44),              gui = "standout" },
-    CmpItemKindConstant      { Constant,              bg = Constant.fg.li(10).da(44),              gui = "standout" },
-    CmpItemKindStruct        { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindEvent         { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindOperator      { Operator,              bg = Operator.fg.li(10).da(44),              gui = "standout" },
-    CmpItemKindTypeParameter { Type,                  bg = Type.fg.li(10).da(44),                  gui = "standout" },
-    CmpItemKindCopilot       { String,                bg = String.fg.li(10).da(44),                gui = "standout" },
+    CmpItemKindText          { fg = Normal.fg.da(10),                bg = Normal.fg.da(MAGIC_NUMBER),                gui = "standout" },
+    CmpItemKindMethod        { fg = sym"@method".fg.da(10),          bg = sym"@method".fg.da(MAGIC_NUMBER),          gui = "standout" },
+    CmpItemKindFunction      { fg = Function.fg.da(10),              bg = Function.fg.da(MAGIC_NUMBER),              gui = "standout" },
+    CmpItemKindConstructor   { fg = sym"@constructor".fg.da(10),     bg = sym"@constructor".fg.da(MAGIC_NUMBER),     gui = "standout" },
+    CmpItemKindField         { fg = sym"@variable.member".fg.da(10), bg = sym"@variable.member".fg.da(MAGIC_NUMBER), gui = "standout" },
+    CmpItemKindVariable      { fg = MsgArea.fg.da(10),               bg = MsgArea.fg.da(MAGIC_NUMBER),               gui = "standout" },
+    CmpItemKindClass         { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindInterface     { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindModule        { fg = sym"@module".fg.da(10),          bg = sym"@module".fg.da(MAGIC_NUMBER),          gui = "standout" },
+    CmpItemKindProperty      { fg = sym"@property".fg.da(10),        bg = sym"@property".fg.da(MAGIC_NUMBER),        gui = "standout" },
+    CmpItemKindUnit          { fg = Number.fg.da(10),                bg = Number.fg.da(MAGIC_NUMBER),                gui = "standout" },
+    CmpItemKindValue         { fg = String.fg.da(10),                bg = String.fg.da(MAGIC_NUMBER),                gui = "standout" },
+    CmpItemKindEnum          { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindKeyword       { fg = Keyword.fg.da(10),               bg = Keyword.fg.da(MAGIC_NUMBER),               gui = "standout" },
+    CmpItemKindSnippet       { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
+    CmpItemKindColor         { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
+    CmpItemKindFile          { fg = Directory.fg.da(10),             bg = Directory.fg.da(MAGIC_NUMBER),             gui = "standout" },
+    CmpItemKindReference     { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
+    CmpItemKindFolder        { fg = Directory.fg.da(10),             bg = Directory.fg.da(MAGIC_NUMBER),             gui = "standout" },
+    CmpItemKindEnumMember    { fg = Constant.fg.da(10),              bg = Constant.fg.da(MAGIC_NUMBER),              gui = "standout" },
+    CmpItemKindConstant      { fg = Constant.fg.da(10),              bg = Constant.fg.da(MAGIC_NUMBER),              gui = "standout" },
+    CmpItemKindStruct        { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindEvent         { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindOperator      { fg = Operator.fg.da(10),              bg = Operator.fg.da(MAGIC_NUMBER),              gui = "standout" },
+    CmpItemKindTypeParameter { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
+    CmpItemKindCopilot       { fg = String.fg.da(10),                bg = String.fg.da(MAGIC_NUMBER),                gui = "standout" },
 
     -- DapUI
     DapUIScope                   { Special },
