@@ -1,6 +1,6 @@
 -- You probably always want to set this in your vim file
 -- vim.opt.background = 'dark'
-if vim.opt.background == "dark" then
+if vim.opt.background:get() == "dark" then
     vim.g.colors_name = 'kanagawa_remix_dark'
 
     -- By setting our module to nil, we clear lua's cache,
