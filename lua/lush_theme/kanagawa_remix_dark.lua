@@ -1,4 +1,4 @@
-local lush = require('lush')
+local lush = require("lush")
 local hsl = lush.hsl
 
 -- >>> 100 * 0.44
@@ -21,10 +21,11 @@ local hsl = lush.hsl
 -- 5119.4
 -- >>> 110 * 0.4654
 -- 51.193999999999996
-local MAGIC_NUMBER = 51.193999999999996
+local MAGIC_NUMBER = 51.193999999999996 - 3
 
 local palette = {
     whitespace = hsl("#1e1e28"),
+    purp = hsl("#571cbd"),
 
     -- Bg Shades
     sumiInk0 = hsl("#16161D"),
@@ -33,7 +34,7 @@ local palette = {
     sumiInk3 = hsl("#1F1F28"),
     sumiInk4 = hsl("#2A2A37"),
     sumiInk5 = hsl("#363646"),
-    sumiInk6 = hsl("#54546D"), --fg
+    sumiInk6 = hsl("#54546D"),
 
     -- Popup and Floats
     waveBlue1 = hsl("#223249"),
@@ -144,6 +145,8 @@ local palette = {
     lotusTeal2 = hsl("#6693bf"),
     lotusTeal3 = hsl("#5a7785"),
     lotusCyan = hsl("#d7e3d8"),
+
+    none = ""
 }
 
 --
@@ -215,16 +218,13 @@ local theme = lush(function(injected_functions)
     CursorLine     { bg = palette.sumiInk5 }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     CursorColumn   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     Directory      { fg = palette.crystalBlue }, -- Directory names (and other special names in listings)
-    -- autumnGreen = "#76946A",
-    -- autumnRed = "#C34043",
-    -- autumnYellow = "#DCA561",
-    DiffAdd        { bg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
-    DiffChange     { bg = palette.autumnYellow }, -- Diff mode: Changed line |diff.txt|
-    DiffDelete     { bg = palette.autumnRed }, -- Diff mode: Deleted line |diff.txt|
-    DiffAdded      { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
-    DiffChanged    { fg = palette.autumnYellow }, -- Diff mode: Changed line |diff.txt|
-    DiffDeleted    { fg = palette.autumnRed }, -- Diff mode: Deleted line |diff.txt|
-    DiffRemoved    { fg = palette.autumnRed }, -- Diff mode: Deleted line |diff.txt|
+    DiffAdd        { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
+    DiffChange     { fg = palette.autumnYellow }, -- Diff mode: Changed line |diff.txt|
+    DiffDelete     { fg = palette.autumnRed }, -- Diff mode: Deleted line |diff.txt|
+    DiffAdded      { DiffAdd }, -- Diff mode: Added line |diff.txt|
+    DiffChanged    { DiffChange }, -- Diff mode: Changed line |diff.txt|
+    DiffDeleted    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
+    DiffRemoved    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
     DiffText       { bg = palette.winterYellow }, -- Diff mode: Changed text within a changed line |diff.txt|
     EndOfBuffer    { fg = palette.sumiInk3 }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
     TermCursor     { gui = "reverse" }, -- Cursor in a focused terminal
@@ -248,10 +248,11 @@ local theme = lush(function(injected_functions)
     MsgSeparator   { bg = palette.sumiInk0 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk3 }, -- Normal text
+    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk0 }, -- Normal text
     NormalFloat    { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Normal text in floating windows.
     FloatBorder    { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Border of floating windows.
     FloatTitle     { fg = palette.springViolet1, bg = palette.sumiInk0, gui = "bold" }, -- Title of floating windows.
+    FloatFooter    { FloatTitle }, -- Footer of floating windows.
     NormalNC       { Normal }, -- normal text in non-current windows
     Pmenu          { fg = palette.fujiWhite, bg = palette.sumiInk4 }, -- Popup menu: Normal item.
     PmenuSel       { bg = palette.sumiInk5 }, -- Popup menu: Selected item.
@@ -341,40 +342,40 @@ local theme = lush(function(injected_functions)
 
     -- See :h lsp-highlight, some groups may not be listed, submit a PR fix to lush-template!
     --
-    LspReferenceText            { bg = palette.winterYellow } , -- Used for highlighting "text" references
-    LspReferenceRead            { LspReferenceText } , -- Used for highlighting "read" references
-    LspReferenceWrite           { LspReferenceText, gui = "underline" } , -- Used for highlighting "write" references
-    LspCodeLens                 { fg = palette.fujiGray } , -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
-    LspCodeLensSeparator        { LspCodeLens } , -- Used to color the seperator between two or more code lens.
-    LspSignatureActiveParameter { fg = palette.roninYellow } , -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
+    LspReferenceText            { bg = palette.winterYellow }, -- Used for highlighting "text" references
+    LspReferenceRead            { LspReferenceText }, -- Used for highlighting "read" references
+    LspReferenceWrite           { LspReferenceText, gui = "underline" }, -- Used for highlighting "write" references
+    LspCodeLens                 { fg = palette.fujiGray }, -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
+    LspCodeLensSeparator        { LspCodeLens }, -- Used to color the seperator between two or more code lens.
+    LspSignatureActiveParameter { fg = palette.roninYellow }, -- Used to highlight the active parameter in the signature help. See |vim.lsp.handlers.signature_help()|.
 
     -- See :h diagnostic-highlights, some groups may not be listed, submit a PR fix to lush-template!
     --
-    DiagnosticError            { fg = palette.samuraiRed } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticWarn             { fg = palette.roninYellow } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticInfo             { fg = palette.dragonBlue } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticHint             { fg = palette.waveAqua1 } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticOk               { fg = palette.springGreen } , -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
-    DiagnosticVirtualTextError { DiagnosticError } , -- Used for "Error" diagnostic virtual text.
-    DiagnosticVirtualTextWarn  { DiagnosticWarn } , -- Used for "Warn" diagnostic virtual text.
-    DiagnosticVirtualTextInfo  { DiagnosticInfo } , -- Used for "Info" diagnostic virtual text.
-    DiagnosticVirtualTextHint  { DiagnosticHint } , -- Used for "Hint" diagnostic virtual text.
-    DiagnosticVirtualTextOk    { DiagnosticOk } , -- Used for "Ok" diagnostic virtual text.
-    DiagnosticUnderlineError   { DiagnosticError, gui = "underline" } , -- Used to underline "Error" diagnostics.
-    DiagnosticUnderlineWarn    { DiagnosticWarn, gui = "underline" } , -- Used to underline "Warn" diagnostics.
-    DiagnosticUnderlineInfo    { DiagnosticInfo, gui = "underline" } , -- Used to underline "Info" diagnostics.
-    DiagnosticUnderlineHint    { DiagnosticHint, gui = "underline" } , -- Used to underline "Hint" diagnostics.
-    DiagnosticUnderlineOk      { DiagnosticOk, gui = "underline" } , -- Used to underline "Ok" diagnostics.
-    DiagnosticFloatingError    { fg = DiagnosticError.fg } , -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
-    DiagnosticFloatingWarn     { fg = DiagnosticWarn.fg } , -- Used to color "Warn" diagnostic messages in diagnostics float.
-    DiagnosticFloatingInfo     { fg = DiagnosticInfo.fg } , -- Used to color "Info" diagnostic messages in diagnostics float.
-    DiagnosticFloatingHint     { fg = DiagnosticHint.fg } , -- Used to color "Hint" diagnostic messages in diagnostics float.
-    DiagnosticFloatingOk       { fg = DiagnosticOk.fg } , -- Used to color "Ok" diagnostic messages in diagnostics float.
-    DiagnosticSignError        { fg = DiagnosticError.fg } , -- Used for "Error" signs in sign column.
-    DiagnosticSignWarn         { fg = DiagnosticWarn.fg } , -- Used for "Warn" signs in sign column.
-    DiagnosticSignInfo         { fg = DiagnosticInfo.fg } , -- Used for "Info" signs in sign column.
-    DiagnosticSignHint         { fg = DiagnosticHint.fg } , -- Used for "Hint" signs in sign column.
-    DiagnosticSignOk           { fg = DiagnosticOk.fg } , -- Used for "Ok" signs in sign column.
+    DiagnosticError            { fg = palette.samuraiRed }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticWarn             { fg = palette.roninYellow }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticInfo             { fg = palette.dragonBlue }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticHint             { fg = palette.waveAqua1 }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticOk               { fg = palette.springGreen }, -- Used as the base highlight group. Other Diagnostic highlights link to this by default (except Underline)
+    DiagnosticVirtualTextError { DiagnosticError }, -- Used for "Error" diagnostic virtual text.
+    DiagnosticVirtualTextWarn  { DiagnosticWarn }, -- Used for "Warn" diagnostic virtual text.
+    DiagnosticVirtualTextInfo  { DiagnosticInfo }, -- Used for "Info" diagnostic virtual text.
+    DiagnosticVirtualTextHint  { DiagnosticHint }, -- Used for "Hint" diagnostic virtual text.
+    DiagnosticVirtualTextOk    { DiagnosticOk }, -- Used for "Ok" diagnostic virtual text.
+    DiagnosticUnderlineError   { sp = DiagnosticError.fg, gui = "undercurl" }, -- Used to underline "Error" diagnostics.
+    DiagnosticUnderlineWarn    { sp = DiagnosticWarn.fg, gui = "undercurl" }, -- Used to underline "Warn" diagnostics.
+    DiagnosticUnderlineInfo    { sp = DiagnosticInfo.fg, gui = "undercurl" }, -- Used to underline "Info" diagnostics.
+    DiagnosticUnderlineHint    { sp = DiagnosticHint.fg, gui = "undercurl" }, -- Used to underline "Hint" diagnostics.
+    DiagnosticUnderlineOk      { sp = DiagnosticOk.fg, gui = "undercurl" }, -- Used to underline "Ok" diagnostics.
+    DiagnosticFloatingError    { DiagnosticError }, -- Used to color "Error" diagnostic messages in diagnostics float. See |vim.diagnostic.open_float()|
+    DiagnosticFloatingWarn     { DiagnosticWarn }, -- Used to color "Warn" diagnostic messages in diagnostics float.
+    DiagnosticFloatingInfo     { DiagnosticInfo }, -- Used to color "Info" diagnostic messages in diagnostics float.
+    DiagnosticFloatingHint     { DiagnosticHint }, -- Used to color "Hint" diagnostic messages in diagnostics float.
+    DiagnosticFloatingOk       { DiagnosticOk }, -- Used to color "Ok" diagnostic messages in diagnostics float.
+    DiagnosticSignError        { DiagnosticError }, -- Used for "Error" signs in sign column.
+    DiagnosticSignWarn         { DiagnosticWarn }, -- Used for "Warn" signs in sign column.
+    DiagnosticSignInfo         { DiagnosticInfo }, -- Used for "Info" signs in sign column.
+    DiagnosticSignHint         { DiagnosticHint }, -- Used for "Hint" signs in sign column.
+    DiagnosticSignOk           { DiagnosticOk }, -- Used for "Ok" signs in sign column.
 
     -- Tree-Sitter syntax groups.
     --
@@ -393,63 +394,67 @@ local theme = lush(function(injected_functions)
     --
     -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
 
-    sym"@text.literal"       { Comment }, -- Comment
-    sym"@text.reference"     { Identifier }, -- Identifier
-    sym"@text.title"         { Title }, -- Title
-    sym"@text.uri"           { Underlined }, -- Underlined
-    sym"@text.underline"     { Underlined }, -- Underlined
-    sym"@text.todo"          { Todo }, -- Todo
-    sym"@comment"            { Comment }, -- Comment
-    sym"@punctuation"        { Delimiter }, -- Delimiter
-    sym"@constant"           { Constant }, -- Constant
-    sym"@constant.builtin"   { Special }, -- Special
-    sym"@constant.macro"     { Define }, -- Define
-    sym"@define"             { Define }, -- Define
-    sym"@macro"              { Macro }, -- Macro
-    sym"@string"             { String }, -- String
-    sym"@string.regexp"      { Operator }, -- String
-    sym"@string.escape"      { Operator }, -- String
-    sym"@string.escape"      { SpecialChar }, -- SpecialChar
-    sym"@string.special"     { SpecialChar }, -- SpecialChar
-    sym"@character"          { Character }, -- Character
-    sym"@character.special"  { SpecialChar }, -- SpecialChar
-    sym"@number"             { Number }, -- Number
-    sym"@boolean"            { Boolean }, -- Boolean
-    sym"@float"              { Float }, -- Float
-    sym"@function"           { Function }, -- Function,,
-    sym"@function.call.lua"  { Function }, -- Function,,
-    sym"@function.builtin"   { Special }, -- Special
-    sym"@function.macro"     { Macro }, -- Macro
-    sym"@parameter"          { Identifier }, -- Identifier
-    sym"@method"             { Function }, -- Function
-    sym"@field"              { Identifier }, -- Identifier
-    sym"@property"           { Identifier }, -- Identifier
-    sym"@constructor"        { Special }, -- Special
-    sym"@conditional"        { Conditional }, -- Conditional
-    sym"@repeat"             { Repeat }, -- Repeat
-    sym"@label"              { Label }, -- Label
-    sym"@operator"           { Operator }, -- Operator
-    sym"@keyword"            { Keyword }, -- Keyword
-    sym"@keyword.operator"   { Operator }, -- Keyword
-    sym"@keyword.return"     { fg = palette.peachRed, gui = "italic" }, -- Keyword
-    sym"@keyword.import.cpp" { PreProc }, -- Keyword
-    sym"@exception"          { Exception }, -- Exception
-    sym"@variable"           { fg = palette.fujiWhite }, -- Identifier
-    sym"@variable.parameter" { fg = palette.oniViolet2 }, -- Identifier
-    sym"@variable.lua"       { sym"@variable" },
-    sym"@variable.builtin"   { PreProc },
-    sym"@variable.member"    { Identifier },
-    sym"@type"               { Type }, -- Type
-    sym"@type.definition"    { Typedef }, -- Typedef
-    sym"@storageclass"       { StorageClass }, -- StorageClass
-    sym"@structure"          { Structure }, -- Structure
-    sym"@namespace"          { Identifier }, -- Identifier
-    sym"@include"            { Include }, -- Include
-    sym"@preproc"            { PreProc }, -- PreProc
-    sym"@debug"              { Debug }, -- Debug
-    sym"@tag"                { Tag }, -- Tag
-    sym"@module"             { Structure }, -- Tag
-    sym"@constructor.lua"    { Keyword },
+    sym"@text.literal"                      { Comment }, -- Comment
+    sym"@text.reference"                    { Identifier }, -- Identifier
+    sym"@text.title"                        { Title }, -- Title
+    sym"@text.uri"                          { Underlined }, -- Underlined
+    sym"@text.underline"                    { Underlined }, -- Underlined
+    sym"@text.todo"                         { Todo }, -- Todo
+    sym"@comment"                           { Comment }, -- Comment
+    sym"@punctuation"                       { Delimiter }, -- Delimiter
+    sym"@constant"                          { Constant }, -- Constant
+    sym"@constant.builtin"                  { Special }, -- Special
+    sym"@constant.macro"                    { Define }, -- Define
+    sym"@define"                            { Define }, -- Define
+    sym"@macro"                             { Macro }, -- Macro
+    sym"@string"                            { String }, -- String
+    sym"@string.regexp"                     { Operator }, -- String
+    sym"@string.escape"                     { Operator }, -- String
+    sym"@string.escape"                     { SpecialChar }, -- SpecialChar
+    sym"@string.special"                    { SpecialChar }, -- SpecialChar
+    sym"@character"                         { Character }, -- Character
+    sym"@character.special"                 { SpecialChar }, -- SpecialChar
+    sym"@number"                            { Number }, -- Number
+    sym"@boolean"                           { Boolean }, -- Boolean
+    sym"@float"                             { Float }, -- Float
+    sym"@function"                          { Function }, -- Function,,
+    sym"@function.call.lua"                 { Function }, -- Function,,
+    sym"@function.builtin"                  { Special }, -- Special
+    sym"@function.macro"                    { Macro }, -- Macro
+    sym"@parameter"                         { Identifier }, -- Identifier
+    sym"@method"                            { Function }, -- Function
+    sym"@field"                             { Identifier }, -- Identifier
+    sym"@property"                          { Identifier }, -- Identifier
+    sym"@constructor"                       { Special }, -- Special
+    sym"@conditional"                       { Conditional }, -- Conditional
+    sym"@repeat"                            { Repeat }, -- Repeat
+    sym"@label"                             { Label }, -- Label
+    sym"@operator"                          { Operator }, -- Operator
+    sym"@keyword"                           { Keyword }, -- Keyword
+    sym"@keyword.operator"                  { Operator }, -- Keyword
+    sym"@keyword.return"                    { fg = palette.peachRed, gui = "italic" }, -- Keyword
+    sym"@keyword.import.cpp"                { PreProc }, -- Keyword
+    sym"@exception"                         { Exception }, -- Exception
+    sym"@variable"                          { fg = palette.fujiWhite }, -- Identifier
+    sym"@variable.parameter"                { fg = palette.oniViolet2 }, -- Identifier
+    sym"@variable.builtin"                  { PreProc },
+    sym"@variable.member"                   { Identifier },
+    sym"@type"                              { Type }, -- Type
+    sym"@type.definition"                   { Typedef }, -- Typedef
+    sym"@storageclass"                      { StorageClass }, -- StorageClass
+    sym"@structure"                         { Structure }, -- Structure
+    sym"@namespace"                         { Identifier }, -- Identifier
+    sym"@include"                           { Include }, -- Include
+    sym"@preproc"                           { PreProc }, -- PreProc
+    sym"@debug"                             { Debug }, -- Debug
+    sym"@tag"                               { Tag }, -- Tag
+    sym"@module"                            { Structure }, -- Tag
+    sym"@constructor.lua"                   { Keyword },
+    sym"@markup.link.url.markdown_inline"   { Special }, -- (url)
+    sym"@markup.link.label.markdown_inline" { Identifier }, -- [label]
+    sym"@markup.italic.markdown_inline"     { Exception }, -- *italic*
+    sym"@markup.raw.markdown_inline"        { String }, -- `code`
+    sym"@markup.list.markdown"              { Function }, -- + list
 
     -- LSP Tokens
     sym"@lsp.type.parameter"                  { sym"@variable.parameter" },
@@ -468,17 +473,17 @@ local theme = lush(function(injected_functions)
     GitSignsDelete { DiffDeleted },
 
     -- MiniDiff
-    MiniDiffSignAdd      { DiffAdd },
-    MiniDiffSignChange   { DiffChange },
-    MiniDiffSignDelete   { DiffDelete },
-    MiniDiffOverAdd      { DiffAdd },
-    MiniDiffOverChange   { DiffText },
-    MiniDiffOverContext  { DiffChange },
-    MiniDiffOverDelete   { DiffDelete },
+    MiniDiffSignAdd     { DiffAdd },
+    MiniDiffSignChange  { DiffChange },
+    MiniDiffSignDelete  { DiffDelete },
+    MiniDiffOverAdd     { bg = palette.winterGreen },
+    MiniDiffOverChange  { bg = palette.winterYellow },
+    MiniDiffOverContext { bg = palette.winterBlue },
+    MiniDiffOverDelete  { bg = palette.winterRed },
 
     -- Mini Hipatterns
     MiniHipatternsFixme { fg = Normal.bg, bg = DiagnosticError.fg, gui = "bold" },
-    MiniHipatternsHack  { fg = Normal.bg, bg = DiagnosticWarning.fg, gui = "bold" },
+    MiniHipatternsHack  { fg = Normal.bg, bg = DiagnosticWarn.fg, gui = "bold" },
     MiniHipatternsNote  { fg = Normal.bg, bg = DiagnosticInfo.fg, gui = "bold" },
     MiniHipatternsTodo  { fg = Normal.bg, bg = DiagnosticHint.fg, gui = "bold" },
 
@@ -499,12 +504,48 @@ local theme = lush(function(injected_functions)
     MiniOperatorsExchangeFrom { IncSearch },
 
     -- MiniNotify
-    MiniNotifyBorder { FloatBorder },
-    MiniNotifyNormal { NormalFloat },
-    MiniNotifyTitle  { FloatTitle },
+    MiniNotifyBorder { FloatBorder, bg = Normal.bg },
+    MiniNotifyNormal { NormalFloat, bg = Normal.bg },
+    MiniNotifyTitle  { FloatTitle, bg = Normal.bg },
 
     -- MiniSurround
     MiniSurround { IncSearch },
+
+    -- MiniStatusline
+    StatuslineBInsert             { fg = palette.springGreen, bg = palette.winterBlue },
+    StatuslineBNormal             { StatuslineBInsert, fg = palette.crystalBlue },
+    StatuslineBNormalInactive     { StatuslineBInsert, fg = palette.crystalBlue },
+    StatuslineBVisual             { StatuslineBInsert, fg = palette.oniViolet },
+    StatuslineBCommand            { StatuslineBInsert, fg = palette.boatYellow2 },
+    StatuslineBReplace            { StatuslineBInsert, fg = palette.surimiOrange },
+    StatuslineInsert              { fg = palette.sumiInk3, bg = palette.springGreen },
+    StatuslineNormal              { fg = palette.sumiInk0, bg = palette.crystalBlue },
+    StatuslineNormalInactive      { fg = palette.oldWhite, bg = palette.crystalBlue },
+    StatuslineVisual              { fg = palette.sumiInk3, bg = palette.oniViolet },
+    StatuslineCommand             { fg = palette.sumiInk3, bg = palette.boatYellow2 },
+    StatuslineReplace             { fg = palette.sumiInk3, bg = palette.surimiOrange },
+    MiniStatuslineModeNormal      { fg = palette.oldWhite, bg = palette.purp },
+    MiniStatuslineModeVisual      { fg = palette.sumiInk1, bg = palette.autumnGreen },
+    MiniStatuslineModeVisualLine  { fg = palette.oldWhite, bg = palette.lotusOrange },
+    MiniStatuslineModeVisualBlock { fg = palette.crystalBlue, bg = palette.sumiInk1 },
+    MiniStatuslineModeSelect      { fg = palette.lotusBlue4, bg = palette.crystalBlue },
+    MiniStatuslineModeInsert      { fg = palette.sumiInk1, bg = palette.crystalBlue },
+    MiniStatuslineModeReplace     { fg = palette.sumiInk1, bg = palette.lotusRed3 },
+    MiniStatuslineModeCommand     { fg = palette.sumiInk1, bg = palette.surimiOrange },
+    MiniStatuslineModeOther       { fg = palette.oldWhite, bg = palette.lotusBlue5 },
+    MiniStatuslineModeTerminal    { fg = palette.carpYellow, bg = palette.sumiInk1 },
+    statuslineRegister            { fg = palette.sumiInk0, bg = palette.crystalBlue },
+    statuslineRegisterRecording   { fg = palette.lotusCyan, bg = palette.lotusRed3 },
+    MiniStatuslineDevinfo         { fg = palette.crystalBlue, bg = palette.springGreen },
+    MiniStatuslineBrackets        { fg = palette.autumnYellow, bg = palette.winterBlue },
+    MiniStatuslineDevinfoB        { fg = palette.fujiWhite, bg = palette.sumiInk4 },
+    StatusDiffAdded               { DiffAdded, bg = palette.sumiInk4 },
+    StatusDiffChanged             { DiffChanged, bg = palette.sumiInk4 },
+    StatusDiffDeleted             { DiffDeleted, bg = palette.sumiInk4 },
+    StatusDiagnosticSignError     { DiagnosticError, bg = palette.winterBlue },
+    StatusDiagnosticSignWarn      { DiagnosticWarn, bg = palette.winterBlue },
+    StatusDiagnosticSignInfo      { DiagnosticInfo, bg = palette.winterBlue },
+    StatusDiagnosticSignHint      { DiagnosticHint, bg = palette.winterBlue },
 
     -- MiniTrailspace
     MiniTrailspace { fg = palette.peachRed, bg = palette.peachRed },
@@ -514,7 +555,11 @@ local theme = lush(function(injected_functions)
     TreesitterContextLineNumber { fg = SpecialKey.fg },
 
     -- Telescope
-    TelescopeBorder          { fg = FloatBorder.fg, bg = Normal.bg },
+    TelescopeBorder          { fg = palette.sumiInk4, bg = Normal.bg },
+    TelescopePromptBorder    { TelescopeBorder, bg = palette.none },
+    TelescopeResultsBorder   { fg = palette.sumiInk2 },
+    TelescopeResultsNormal   { fg = palette.oldWhite },
+    TelescopePreviewBorder   { fg = palette.sumiInk1 },
     TelescopeTitle           { Title },
     TelescopeSelection       { CursorLine },
     TelescopeSelectionCaret  { CursorLineNr },
@@ -590,6 +635,17 @@ local theme = lush(function(injected_functions)
     DapUIPlayPause               { String },
     DapUIRestart                 { String },
     DapUIUnavailable             { Comment },
+
+    -- Hydra
+    HydraRed      { fg = "#FF5733" },
+    HydraBlue     { fg = "#5EBCF6" },
+    HydraAmaranth { fg = "#ff1757" },
+    HydraTeal     { fg = "#00a1a1" },
+    HydraPink     { fg = "#ff55de" },
+    HydraHint     { NormalFloat },
+    HydraBorder   { FloatBorder },
+    HydraTitle    { FloatTitle },
+    HydraFooter   { FloatFooter },
 
     -- checkhealth
     healthError   { DiagnosticError },
