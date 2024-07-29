@@ -226,7 +226,7 @@ local theme = lush(function(injected_functions)
     ColorColumn    { bg = palette.normWhite2 }, -- Columns set with 'colorcolumn'
     Conceal        { fg = palette.springViolet1, gui = "bold" }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
     Cursor         { fg = palette.fujiWhite, bg = palette.lotusWhite3 }, -- Character under the cursor
-    CurSearch      { fg = palette.fujiWhite, bg = palette.waveBlue2 }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
+    CurSearch      { fg = palette.fujiWhite, bg = palette.crystalBlue0 }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     lCursor        { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM       { Cursor }, -- Like Cursor, but used when in IME mode |CursorIM|
     CursorLine     { bg = palette.lotusWhite3 }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
@@ -239,7 +239,7 @@ local theme = lush(function(injected_functions)
     DiffChanged    { DiffChange }, -- Diff mode: Changed line |diff.txt|
     DiffDeleted    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
     DiffRemoved    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
-    DiffText       { bg = palette.normWhite5 }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffText       { bg = palette.lotusWhite5 }, -- Diff mode: Changed text within a changed line |diff.txt|
     TermCursor     { gui = "reverse" }, -- Cursor in a focused terminal
     TermCursorNC   { }, -- Cursor in an unfocused terminal
     ErrorMsg       { fg = palette.samuraiRed }, -- Error messages on the command line
@@ -252,13 +252,13 @@ local theme = lush(function(injected_functions)
     LineNr         { fg = palette.sumiInk6 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     LineNrAbove    { LineNr }, -- Line number for when the 'relativenumber' option is set, above the cursor line
     LineNrBelow    { LineNr }, -- Line number for when the 'relativenumber' option is set, below the cursor line
-    CursorLineNr   { fg = palette.roninYellow, gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    CursorLineNr   { fg = palette.roninYellow.da(20), gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
     CursorLineFold { FoldColumn }, -- Like FoldColumn when 'cursorline' is set for the cursor line
     CursorLineSign { SignColumn }, -- Like SignColumn when 'cursorline' is set for the cursor line
     MatchParen     { fg = palette.roninYellow, gui = "bold" }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg        { fg = palette.roninYellow, gui = "bold" }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea        { fg = palette.sumiInk4 }, -- Area for messages and cmdline
-    MsgSeparator   { bg = palette.normWhite5 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
+    MsgSeparator   { bg = palette.lotusWhite5 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal         { fg = palette.sumiInk6, bg = palette.lotusWhite7 }, -- Normal text
@@ -269,15 +269,15 @@ local theme = lush(function(injected_functions)
     FloatFooter    { FloatTitle }, -- Footer of floating windows.
     NormalNC       { Normal }, -- normal text in non-current windows
     Pmenu          { fg = Normal.fg, bg = palette.lotusWhite1 }, -- Popup menu: Normal item.
-    PmenuSel       { bg = palette.normWhite5 }, -- Popup menu: Selected item.
+    PmenuSel       { bg = palette.lotusWhite5 }, -- Popup menu: Selected item.
     PmenuKind      { fg = palette.sumiInk4, bg = palette.fujiWhite }, -- Popup menu: Normal item "kind"
     PmenuKindSel   { fg = palette.oldWhite, bg = palette.lotusWhite2 }, -- Popup menu: Selected item "kind"
     PmenuExtra     { fg = palette.springViolet1, bg = PmenuKind.bg }, -- Popup menu: Normal item "extra text"
     PmenuExtraSel  { fg = palette.springViolet1, bg = PmenuKindSel.bg }, -- Popup menu: Selected item "extra text"
-    PmenuSbar      { bg = palette.normWhite2 }, -- Popup menu: Scrollbar.
-    PmenuThumb     { bg = palette.normWhite5 }, -- Popup menu: Thumb of the scrollbar.
+    PmenuSbar      { bg = palette.lotusWhite2 }, -- Popup menu: Scrollbar.
+    PmenuThumb     { bg = palette.lotusWhite5 }, -- Popup menu: Thumb of the scrollbar.
     Question       { MoreMsg }, -- |hit-enter| prompt and yes/no questions
-    QuickFixLine   { bg = palette.normWhite4}, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+    QuickFixLine   { bg = palette.lotusWhite4}, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
     Search         { fg = palette.fujiWhite, bg = palette.springBlue  }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     SpecialKey     { fg = palette.springViolet1 }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad       { sp = palette.samuraiRed, gui = "undercurl" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
@@ -287,10 +287,10 @@ local theme = lush(function(injected_functions)
     StatusLine     { fg = palette.sumiInk4, bg = palette.lotusWhite0 }, -- Status line of current window
     StatusLineNC   { fg = palette.normWhite6, bg = StatusLine.bg }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine        { fg = palette.springViolet1, bg = StatusLine.bg }, -- Tab pages line, not active tab page label
-    TabLineFill    { bg = palette.normWhite3 }, -- Tab pages line, where there are no labels
-    TabLineSel     { fg = palette.sumiInk4, bg = palette.normWhite4 }, -- Tab pages line, active tab page label
+    TabLineFill    { bg = palette.lotusWhite3 }, -- Tab pages line, where there are no labels
+    TabLineSel     { fg = palette.sumiInk4, bg = palette.lotusWhite5 }, -- Tab pages line, active tab page label
     Title          { fg = palette.crystalBlue, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual         { bg = palette.oldWhite }, -- Visual mode selection
+    Visual         { fg = palette.lotusWhite7, bg = palette.crystalBlue }, -- Visual mode selection
     VisualNOS      { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg     { fg = palette.roninYellow }, -- Warning messages
     Whitespace     { fg = palette.whitespace }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
@@ -309,15 +309,15 @@ local theme = lush(function(injected_functions)
 
     Comment        { fg = palette.dragonGray, gui = "italic" }, -- Any comment
 
-    Constant       { fg = palette.surimiOrange, gui = "bold" }, -- (*) Any constant
+    Constant       { fg = palette.surimiOrange.da(10), gui = "bold" }, -- (*) Any constant
     String         { fg = palette.lotusGreen2 }, --   A string constant: "this is a string"
     Character      { String }, --   A character constant: 'c', '\n'
     Number         { fg = palette.waveRed }, --   A number constant: 234, 0xff
     Boolean        { fg = palette.surimiOrange, gui = "bold"  }, --   A boolean constant: TRUE, false
     Float          { Number }, --   A floating point constant: 2.3e10
 
-    Identifier     { fg = palette.waveAqua2 }, -- (*) Any variable name
-    Function       { fg = palette.crystalBlue.li(30).da(10) }, --   Function name (also: methods for classes)
+    Identifier     { fg = palette.dragonOrange.da(10) }, -- (*) Any variable name
+    Function       { fg = palette.crystalBlue.hue(300).li(30).da(35) }, --   Function name (also: methods for classes)
 
     Statement      { fg = palette.oniViolet, gui = "bold" }, -- (*) Any statement
     Conditional    { Statement }, --   if, then, else, endif, switch, etc.
@@ -333,7 +333,7 @@ local theme = lush(function(injected_functions)
     Macro          { PreProc }, --   Same as Define
     PreCondit      { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
-    Type           { fg = palette.autumnGreen }, -- (*) int, long, char, etc.
+    Type           { fg = palette.crystalBlue.hue(161).saturation(34).lightness(38).da(10) }, -- (*) int, long, char, etc.
     StorageClass   { Type }, --   static, register, volatile, etc.
     Structure      { Type }, --   struct, union, enum, etc.
     Typedef        { Type }, --   A typedef
@@ -341,7 +341,7 @@ local theme = lush(function(injected_functions)
     Special        { fg = palette.lotusBlue5 }, -- (*) Any special symbol
     SpecialChar    { Special }, --   Special character in a constant
     Tag            { Special }, --   You can use CTRL-] on this
-    Delimiter      { fg = palette.oniViolet }, --   Character that needs attention
+    Delimiter      { fg = palette.oniViolet.da(20) }, --   Character that needs attention
     SpecialComment { Operator }, --   Special things inside a comment (e.g. '\n')
     Debug          { Special }, --   Debugging statements
 

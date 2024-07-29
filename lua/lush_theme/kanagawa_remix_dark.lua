@@ -247,7 +247,7 @@ local theme = lush(function(injected_functions)
     MsgSeparator   { bg = palette.sumiInk0 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk3 }, -- Normal text
+    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk0 }, -- Normal text
     EndOfBuffer    { Normal, fg = palette.oldWhite }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
     NormalFloat    { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Normal text in floating windows.
     FloatBorder    { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Border of floating windows.
@@ -279,7 +279,7 @@ local theme = lush(function(injected_functions)
     Visual         { bg = palette.waveBlue1 }, -- Visual mode selection
     VisualNOS      { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg     { fg = palette.roninYellow }, -- Warning messages
-    Whitespace     { fg = palette.sumiInk6 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace     { fg = palette.sumiInk5 }, -- "nbsp", "space", "tab" or "trail" in 'listchars'
     WinSeparator   { VertSplit }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
     WildMenu       { Pmenu }, -- Current match in 'wildmenu' completion
     WinBar         { fg = palette.oldWhite }, -- Window bar of current window
