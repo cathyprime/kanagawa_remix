@@ -1,5 +1,6 @@
 local lush = require("lush")
 local hsl = lush.hsl
+local hsluv = lush.hsluv
 
 -- >>> 100 * 0.44
 -- 44.0
@@ -21,11 +22,18 @@ local hsl = lush.hsl
 -- 5119.4
 -- >>> 110 * 0.4654
 -- 51.193999999999996
-local MAGIC_NUMBER = 51.193999999999996 - 3
+local MAGIC_NUMBER = 51.193999999999996 - 18
 
 local palette = {
-    whitespace = hsl("#1e1e28"),
+    whitespace = hsl("#C8C093"),
     purp = hsl("#571cbd"),
+    normWhite0 = hsluv(78, 15, 96),
+    normWhite1 = hsluv(78, 15, 93),
+    normWhite2 = hsluv(78, 15, 90),
+    normWhite3 = hsluv(78, 15, 87),
+    normWhite4 = hsluv(78, 15, 84),
+    normWhite5 = hsluv(78, 15, 81),
+    aquamarine = hsl("#7FFFD4"),
 
     -- Bg Shades
     sumiInk0 = hsl("#16161D"),
@@ -62,6 +70,7 @@ local palette = {
 
     oniViolet = hsl("#957FB8"),
     oniViolet2 = hsl("#b8b4d0"),
+    crystalBlue0 = hsluv(252, 60, 55),
     crystalBlue = hsl("#7E9CD8"),
     springViolet1 = hsl("#938AA9"),
     springViolet2 = hsl("#9CABCA"),
@@ -70,6 +79,7 @@ local palette = {
     waveAqua2 = hsl("#7AA89F"),
 
     springGreen = hsl("#98BB6C"),
+    boatYellow0 = hsluv(64, 54, 36),
     boatYellow1 = hsl("#938056"),
     boatYellow2 = hsl("#C0A36E"),
     carpYellow = hsl("#E6C384"),
@@ -114,6 +124,8 @@ local palette = {
     lotusWhite1 = hsl("#dcd5ac"),
     lotusWhite2 = hsl("#e5ddb0"),
     lotusWhite3 = hsl("#f2ecbc"),
+    lotusWhite7 = hsluv("#fbf1c7"),
+    lotusWhite6 = hsluv(80, 35, 95),
     lotusWhite4 = hsl("#e7dba0"),
     lotusWhite5 = hsl("#e4d794"),
     lotusViolet1 = hsl("#a09cac"),
@@ -122,9 +134,10 @@ local palette = {
     lotusViolet4 = hsl("#624c83"),
     lotusBlue1 = hsl("#c7d7e0"),
     lotusBlue2 = hsl("#b5cbd2"),
-    lotusBlue3 = hsl("#9fb5c9"),
-    lotusBlue4 = hsl("#4d699b"),
-    lotusBlue5 = hsl("#5d57a3"),
+    lotusBlue3 = hsluv(242, 36, 70),
+    lotusBlue4 = hsl("#9fb5c9"),
+    lotusBlue5 = hsl("#4d699b"),
+    lotusBlue6 = hsl("#5d57a3"),
     lotusGreen = hsl("#6f894e"),
     lotusGreen2 = hsl("#6e915f"),
     lotusGreen3 = hsl("#b7d0ae"),
@@ -145,6 +158,7 @@ local palette = {
     lotusTeal2 = hsl("#6693bf"),
     lotusTeal3 = hsl("#5a7785"),
     lotusCyan = hsl("#d7e3d8"),
+    lotusCyan0 = hsl("#00ffff"),
 
     none = ""
 }
@@ -209,13 +223,13 @@ local theme = lush(function(injected_functions)
     --
     -- See :h highlight-groups
     --
-    ColorColumn    { bg = palette.sumiInk4 }, -- Columns set with 'colorcolumn'
+    ColorColumn    { bg = palette.normWhite2 }, -- Columns set with 'colorcolumn'
     Conceal        { fg = palette.springViolet1, gui = "bold" }, -- Placeholder characters substituted for concealed text (see 'conceallevel')
-    Cursor         { fg = palette.sumiInk3, bg = palette.fujiWhite }, -- Character under the cursor
+    Cursor         { fg = palette.fujiWhite, bg = palette.lotusWhite3 }, -- Character under the cursor
     CurSearch      { fg = palette.fujiWhite, bg = palette.waveBlue2 }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     lCursor        { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM       { Cursor }, -- Like Cursor, but used when in IME mode |CursorIM|
-    CursorLine     { bg = palette.sumiInk5 }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine     { bg = palette.lotusWhite3 }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     CursorColumn   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     Directory      { fg = palette.crystalBlue }, -- Directory names (and other special names in listings)
     DiffAdd        { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
@@ -225,11 +239,11 @@ local theme = lush(function(injected_functions)
     DiffChanged    { DiffChange }, -- Diff mode: Changed line |diff.txt|
     DiffDeleted    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
     DiffRemoved    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
-    DiffText       { bg = palette.winterYellow }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffText       { bg = palette.normWhite5 }, -- Diff mode: Changed text within a changed line |diff.txt|
     TermCursor     { gui = "reverse" }, -- Cursor in a focused terminal
     TermCursorNC   { }, -- Cursor in an unfocused terminal
     ErrorMsg       { fg = palette.samuraiRed }, -- Error messages on the command line
-    VertSplit      { fg = palette.winterBlue, bg = palette.winterBlue }, -- Column separating vertically split windows
+    VertSplit      { fg = palette.oldWhite, bg = palette.oldWhite }, -- Column separating vertically split windows
     Folded         { }, -- Line used for closed folds
     FoldColumn     { fg = palette.sumiInk6 }, -- 'foldcolumn'
     SignColumn     { fg = palette.springViolet1 }, -- Column where |signs| are displayed
@@ -243,47 +257,47 @@ local theme = lush(function(injected_functions)
     CursorLineSign { SignColumn }, -- Like SignColumn when 'cursorline' is set for the cursor line
     MatchParen     { fg = palette.roninYellow, gui = "bold" }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg        { fg = palette.roninYellow, gui = "bold" }, -- 'showmode' message (e.g., "-- INSERT -- ")
-    MsgArea        { fg = palette.oldWhite }, -- Area for messages and cmdline
-    MsgSeparator   { bg = palette.sumiInk0 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
+    MsgArea        { fg = palette.sumiInk4 }, -- Area for messages and cmdline
+    MsgSeparator   { bg = palette.normWhite5 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk3 }, -- Normal text
+    Normal         { fg = palette.sumiInk6, bg = palette.lotusWhite7 }, -- Normal text
     EndOfBuffer    { Normal, fg = palette.oldWhite }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
-    NormalFloat    { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Normal text in floating windows.
-    FloatBorder    { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Border of floating windows.
-    FloatTitle     { fg = palette.springViolet1, bg = palette.sumiInk0, gui = "bold" }, -- Title of floating windows.
+    NormalFloat    { fg = palette.sumiInk3, bg = palette.lotusWhite3 }, -- Normal text in floating windows.
+    FloatBorder    { fg = palette.normWhite5, bg = NormalFloat.bg }, -- Border of floating windows.
+    FloatTitle     { fg = palette.springViolet1, bg = NormalFloat.bg, gui = "bold" }, -- Title of floating windows.
     FloatFooter    { FloatTitle }, -- Footer of floating windows.
     NormalNC       { Normal }, -- normal text in non-current windows
-    Pmenu          { fg = Normal.fg, bg = palette.sumiInk4 }, -- Popup menu: Normal item.
-    PmenuSel       { bg = palette.sumiInk5 }, -- Popup menu: Selected item.
-    PmenuKind      { fg = palette.oldWhite, bg = palette.waveBlue1 }, -- Popup menu: Normal item "kind"
-    PmenuKindSel   { fg = palette.oldWhite, bg = palette.waveBlue2 }, -- Popup menu: Selected item "kind"
-    PmenuExtra     { fg = palette.springViolet1, bg = palette.waveBlue1 }, -- Popup menu: Normal item "extra text"
-    PmenuExtraSel  { fg = palette.springViolet1, bg = palette.waveBlue2 }, -- Popup menu: Selected item "extra text"
-    PmenuSbar      { bg = palette.sumiInk2 }, -- Popup menu: Scrollbar.
-    PmenuThumb     { bg = palette.sumiInk5 }, -- Popup menu: Thumb of the scrollbar.
+    Pmenu          { fg = Normal.fg, bg = palette.lotusWhite1 }, -- Popup menu: Normal item.
+    PmenuSel       { bg = palette.normWhite5 }, -- Popup menu: Selected item.
+    PmenuKind      { fg = palette.sumiInk4, bg = palette.fujiWhite }, -- Popup menu: Normal item "kind"
+    PmenuKindSel   { fg = palette.oldWhite, bg = palette.lotusWhite2 }, -- Popup menu: Selected item "kind"
+    PmenuExtra     { fg = palette.springViolet1, bg = PmenuKind.bg }, -- Popup menu: Normal item "extra text"
+    PmenuExtraSel  { fg = palette.springViolet1, bg = PmenuKindSel.bg }, -- Popup menu: Selected item "extra text"
+    PmenuSbar      { bg = palette.normWhite2 }, -- Popup menu: Scrollbar.
+    PmenuThumb     { bg = palette.normWhite5 }, -- Popup menu: Thumb of the scrollbar.
     Question       { MoreMsg }, -- |hit-enter| prompt and yes/no questions
-    QuickFixLine   { bg = palette.sumiInk4}, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
-    Search         { fg = palette.fujiWhite, bg = palette.waveBlue2  }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
+    QuickFixLine   { bg = palette.normWhite4}, -- Current |quickfix| item in the quickfix window. Combined with |hl-CursorLine| when the cursor is there.
+    Search         { fg = palette.fujiWhite, bg = palette.springBlue  }, -- Last search pattern highlighting (see 'hlsearch'). Also used for similar items that need to stand out.
     SpecialKey     { fg = palette.springViolet1 }, -- Unprintable characters: text displayed differently from what it really is. But not 'listchars' whitespace. |hl-Whitespace|
     SpellBad       { sp = palette.samuraiRed, gui = "undercurl" }, -- Word that is not recognized by the spellchecker. |spell| Combined with the highlighting used otherwise.
     SpellCap       { sp = palette.roninYellow, gui = "undercurl" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal     { sp = palette.roninYellow, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare      { sp = palette.roninYellow, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-    StatusLine     { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Status line of current window
-    StatusLineNC   { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
-    TabLine        { fg = palette.springViolet1, bg = palette.sumiInk0 }, -- Tab pages line, not active tab page label
-    TabLineFill    { bg = palette.sumiInk3 }, -- Tab pages line, where there are no labels
-    TabLineSel     { fg = palette.oldWhite, bg = palette.sumiInk4}, -- Tab pages line, active tab page label
+    StatusLine     { fg = palette.sumiInk4, bg = palette.lotusWhite0 }, -- Status line of current window
+    StatusLineNC   { fg = palette.normWhite6, bg = StatusLine.bg }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
+    TabLine        { fg = palette.springViolet1, bg = StatusLine.bg }, -- Tab pages line, not active tab page label
+    TabLineFill    { bg = palette.normWhite3 }, -- Tab pages line, where there are no labels
+    TabLineSel     { fg = palette.sumiInk4, bg = palette.normWhite4 }, -- Tab pages line, active tab page label
     Title          { fg = palette.crystalBlue, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual         { bg = palette.waveBlue1 }, -- Visual mode selection
+    Visual         { bg = palette.oldWhite }, -- Visual mode selection
     VisualNOS      { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg     { fg = palette.roninYellow }, -- Warning messages
-    Whitespace     { fg = palette.sumiInk6 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace     { fg = palette.whitespace }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WinSeparator   { VertSplit }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
     WildMenu       { Pmenu }, -- Current match in 'wildmenu' completion
-    WinBar         { fg = palette.oldWhite }, -- Window bar of current window
-    WinBarNC       { fg = palette.oldWhite }, -- Window bar of not-current windows
+    WinBar         { fg = palette.sumiInk4 }, -- Window bar of current window
+    WinBarNC       { fg = palette.sumiInk4 }, -- Window bar of not-current windows
 
     -- Common vim syntax groups used for all kinds of code and markup.
     -- Commented-out groups should chain up to their preferred (*) group
@@ -293,48 +307,48 @@ local theme = lush(function(injected_functions)
     --
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Comment        { fg = palette.fujiGray, gui = "italic" }, -- Any comment
+    Comment        { fg = palette.dragonGray, gui = "italic" }, -- Any comment
 
-    Constant       { fg = palette.surimiOrange }, -- (*) Any constant
-    String         { fg = palette.springGreen }, --   A string constant: "this is a string"
+    Constant       { fg = palette.surimiOrange, gui = "bold" }, -- (*) Any constant
+    String         { fg = palette.lotusGreen2 }, --   A string constant: "this is a string"
     Character      { String }, --   A character constant: 'c', '\n'
-    Number         { fg = palette.sakuraPink }, --   A number constant: 234, 0xff
+    Number         { fg = palette.waveRed }, --   A number constant: 234, 0xff
     Boolean        { fg = palette.surimiOrange, gui = "bold"  }, --   A boolean constant: TRUE, false
     Float          { Number }, --   A floating point constant: 2.3e10
 
-    Identifier     { fg = palette.carpYellow }, -- (*) Any variable name
-    Function       { fg = palette.crystalBlue }, --   Function name (also: methods for classes)
+    Identifier     { fg = palette.waveAqua2 }, -- (*) Any variable name
+    Function       { fg = palette.crystalBlue.li(30).da(10) }, --   Function name (also: methods for classes)
 
     Statement      { fg = palette.oniViolet, gui = "bold" }, -- (*) Any statement
     Conditional    { Statement }, --   if, then, else, endif, switch, etc.
     Repeat         { Statement }, --   for, do, while, etc.
     Label          { Statement }, --   case, default, etc.
-    Operator       { fg = palette.boatYellow2 }, --   "sizeof", "+", "*", etc.
-    Keyword        { fg = palette.oniViolet, gui = "italic" }, --   any other keyword
-    Exception      { fg = palette.waveRed }, --   try, catch, throw
+    Operator       { fg = palette.boatYellow1 }, --   "sizeof", "+", "*", etc.
+    Keyword        { fg = palette.purp, gui = "italic" }, --   any other keyword
+    Exception      { fg = palette.lotusRed3 }, --   try, catch, throw
 
-    PreProc        { fg = palette.waveRed }, -- (*) Generic Preprocessor
+    PreProc        { fg = palette.peachRed }, -- (*) Generic Preprocessor
     Include        { PreProc }, --   Preprocessor #include
     Define         { PreProc }, --   Preprocessor #define
     Macro          { PreProc }, --   Same as Define
     PreCondit      { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
-    Type           { fg = palette.waveAqua2 }, -- (*) int, long, char, etc.
+    Type           { fg = palette.autumnGreen }, -- (*) int, long, char, etc.
     StorageClass   { Type }, --   static, register, volatile, etc.
     Structure      { Type }, --   struct, union, enum, etc.
     Typedef        { Type }, --   A typedef
 
-    Special        { fg = palette.springBlue }, -- (*) Any special symbol
+    Special        { fg = palette.lotusBlue5 }, -- (*) Any special symbol
     SpecialChar    { Special }, --   Special character in a constant
     Tag            { Special }, --   You can use CTRL-] on this
-    Delimiter      { fg = palette.springViolet2 }, --   Character that needs attention
-    SpecialComment { Special }, --   Special things inside a comment (e.g. '\n')
+    Delimiter      { fg = palette.oniViolet }, --   Character that needs attention
+    SpecialComment { Operator }, --   Special things inside a comment (e.g. '\n')
     Debug          { Special }, --   Debugging statements
 
-    Underlined     { fg = palette.springBlue, gui = "underline" }, -- Text that stands out, HTML links
+    Underlined     { fg = palette.crystalBlue, gui = "underline" }, -- Text that stands out, HTML links
     Ignore         { NonText }, -- Left blank, hidden |hl-Ignore| (NOTE: May be invisible here in template)
     Error          { fg = palette.samuraiRed }, -- Any erroneous construct
-    Todo           { fg = palette.waveBlue1, bg = palette.dragonBlue, gui = "bold"  }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
+    Todo           { fg = palette.waveBlue1, bg = palette.lightBlue, gui = "bold"  }, -- Anything that needs extra attention; mostly the keywords TODO FIXME and XXX
 
     -- These groups are for the native LSP client and diagnostic system. Some
     -- other LSP clients may use these groups, or use their own. Consult your
@@ -342,7 +356,7 @@ local theme = lush(function(injected_functions)
 
     -- See :h lsp-highlight, some groups may not be listed, submit a PR fix to lush-template!
     --
-    LspReferenceText            { bg = palette.winterYellow }, -- Used for highlighting "text" references
+    LspReferenceText            { bg = palette.normWhite3 }, -- Used for highlighting "text" references
     LspReferenceRead            { LspReferenceText }, -- Used for highlighting "read" references
     LspReferenceWrite           { LspReferenceText, gui = "underline" }, -- Used for highlighting "write" references
     LspCodeLens                 { fg = palette.fujiGray }, -- Used to color the virtual text of the codelens. See |nvim_buf_set_extmark()|.
@@ -436,7 +450,7 @@ local theme = lush(function(injected_functions)
     sym"@keyword.import.cpp"                { PreProc }, -- Keyword
     sym"@exception"                         { Exception }, -- Exception
     sym"@variable"                          { fg = Normal.fg }, -- Identifier
-    sym"@variable.parameter"                { fg = palette.oniViolet2 }, -- Identifier
+    sym"@variable.parameter"                { fg = Identifier.fg }, -- Identifier
     sym"@variable.builtin"                  { PreProc },
     sym"@variable.member"                   { Identifier },
     sym"@type"                              { Type }, -- Type
@@ -476,10 +490,10 @@ local theme = lush(function(injected_functions)
     MiniDiffSignAdd     { DiffAdd },
     MiniDiffSignChange  { DiffChange },
     MiniDiffSignDelete  { DiffDelete },
-    MiniDiffOverAdd     { bg = palette.winterGreen },
-    MiniDiffOverChange  { bg = palette.winterYellow },
-    MiniDiffOverContext { bg = palette.winterBlue },
-    MiniDiffOverDelete  { bg = palette.winterRed },
+    MiniDiffOverAdd     { bg = palette.dragonGreen },
+    MiniDiffOverChange  { bg = palette.dragonYellow },
+    MiniDiffOverContext { bg = palette.dragonBlue },
+    MiniDiffOverDelete  { bg = palette.dragonRed },
 
     -- Mini Hipatterns
     MiniHipatternsFixme { fg = Normal.bg, bg = DiagnosticError.fg, gui = "bold" },
@@ -512,12 +526,12 @@ local theme = lush(function(injected_functions)
     MiniSurround { IncSearch },
 
     -- MiniStatusline
-    StatuslineBInsert             { fg = palette.springGreen, bg = palette.winterBlue },
-    StatuslineBNormal             { StatuslineBInsert, fg = palette.crystalBlue },
-    StatuslineBNormalInactive     { StatuslineBInsert, fg = palette.crystalBlue },
-    StatuslineBVisual             { StatuslineBInsert, fg = palette.oniViolet },
-    StatuslineBCommand            { StatuslineBInsert, fg = palette.boatYellow2 },
-    StatuslineBReplace            { StatuslineBInsert, fg = palette.surimiOrange },
+    StatuslineBInsert             { fg = palette.springGreen, bg = palette.lotusBlue2, gui = "bold italic" },
+    StatuslineBNormal             { StatuslineBInsert, fg = palette.lotusTeal3 },
+    StatuslineBNormalInactive     { StatuslineBInsert, fg = StatuslineBNormal.fg },
+    StatuslineBVisual             { StatuslineBInsert, fg = palette.lotusBlue6 },
+    StatuslineBCommand            { StatuslineBInsert, fg = palette.boatYellow1 },
+    StatuslineBReplace            { StatuslineBInsert, fg = palette.lotusOrange },
     StatuslineInsert              { fg = palette.sumiInk3, bg = palette.springGreen },
     StatuslineNormal              { fg = palette.sumiInk0, bg = palette.crystalBlue },
     StatuslineNormalInactive      { fg = palette.oldWhite, bg = palette.crystalBlue },
@@ -526,22 +540,22 @@ local theme = lush(function(injected_functions)
     StatuslineReplace             { fg = palette.sumiInk3, bg = palette.surimiOrange },
     MiniStatuslineModeNormal      { fg = palette.oldWhite, bg = palette.purp },
     MiniStatuslineModeVisual      { fg = palette.sumiInk1, bg = palette.autumnGreen },
-    MiniStatuslineModeVisualLine  { fg = palette.oldWhite, bg = palette.lotusOrange },
-    MiniStatuslineModeVisualBlock { fg = palette.crystalBlue, bg = palette.sumiInk1 },
-    MiniStatuslineModeSelect      { fg = palette.lotusBlue4, bg = palette.crystalBlue },
+    MiniStatuslineModeVisualLine  { fg = palette.normWhite0, bg = palette.lotusOrange },
+    MiniStatuslineModeVisualBlock { fg = palette.crystalBlue, bg = palette.normWhite1 },
+    MiniStatuslineModeSelect      { fg = palette.lotusBlue5, bg = palette.crystalBlue },
     MiniStatuslineModeInsert      { fg = palette.sumiInk1, bg = palette.crystalBlue },
     MiniStatuslineModeReplace     { fg = palette.sumiInk1, bg = palette.lotusRed3 },
     MiniStatuslineModeCommand     { fg = palette.sumiInk1, bg = palette.surimiOrange },
-    MiniStatuslineModeOther       { fg = palette.oldWhite, bg = palette.lotusBlue5 },
-    MiniStatuslineModeTerminal    { fg = palette.carpYellow, bg = palette.sumiInk1 },
+    MiniStatuslineModeOther       { fg = palette.oldWhite, bg = palette.lotusBlue6 },
+    MiniStatuslineModeTerminal    { fg = palette.carpYellow, bg = palette.boatYellow0 },
     statuslineRegister            { fg = palette.sumiInk0, bg = palette.crystalBlue },
     statuslineRegisterRecording   { fg = palette.lotusCyan, bg = palette.lotusRed3 },
     MiniStatuslineDevinfo         { fg = palette.crystalBlue, bg = palette.springGreen },
-    MiniStatuslineBrackets        { fg = palette.autumnYellow, bg = StatuslineBInsert.bg },
-    MiniStatuslineDevinfoB        { fg = palette.fujiWhite, bg = CursorLine.bg },
-    StatusDiffAdded               { DiffAdded, bg = palette.sumiInk4 },
-    StatusDiffChanged             { DiffChanged, bg = palette.sumiInk4 },
-    StatusDiffDeleted             { DiffDeleted, bg = palette.sumiInk4 },
+    MiniStatuslineBrackets        { Operator, bg = StatuslineBCommand.bg },
+    MiniStatuslineDevinfoB        { fg = palette.sumiInk4, bg = CursorLine.bg },
+    StatusDiffAdded               { DiffAdded, bg = MiniStatuslineDevinfoB.bg },
+    StatusDiffChanged             { DiffChanged, bg = MiniStatuslineDevinfoB.bg },
+    StatusDiffDeleted             { DiffDeleted, bg = MiniStatuslineDevinfoB.bg },
     StatusDiagnosticSignError     { DiagnosticError, bg = StatuslineBInsert.bg },
     StatusDiagnosticSignWarn      { DiagnosticWarn, bg = StatuslineBInsert.bg },
     StatusDiagnosticSignInfo      { DiagnosticInfo, bg = StatuslineBInsert.bg },
@@ -555,11 +569,11 @@ local theme = lush(function(injected_functions)
     TreesitterContextLineNumber { fg = SpecialKey.fg },
 
     -- Telescope
-    TelescopeBorder          { fg = palette.sumiInk4, bg = Normal.bg },
+    TelescopeBorder          { fg = palette.normWhite4, bg = Normal.bg },
     TelescopePromptBorder    { TelescopeBorder, bg = palette.none },
-    TelescopeResultsBorder   { fg = palette.sumiInk2 },
-    TelescopeResultsNormal   { fg = palette.oldWhite },
-    TelescopePreviewBorder   { fg = palette.sumiInk1 },
+    TelescopeResultsBorder   { fg = palette.normWhite2 },
+    TelescopeResultsNormal   { fg = palette.sumiInk3 },
+    TelescopePreviewBorder   { fg = palette.normWhite1 },
     TelescopeTitle           { Title },
     TelescopeSelection       { CursorLine },
     TelescopeSelectionCaret  { CursorLineNr },
@@ -583,32 +597,32 @@ local theme = lush(function(injected_functions)
     CmpItemKindDefault     { MsgArea },
     CmpItemMenu            { MsgArea },
 
-    CmpItemKindText          { fg = Normal.fg.da(10),                bg = Normal.fg.da(MAGIC_NUMBER),                gui = "standout" },
-    CmpItemKindMethod        { fg = sym"@method".fg.da(10),          bg = sym"@method".fg.da(MAGIC_NUMBER),          gui = "standout" },
-    CmpItemKindFunction      { fg = Function.fg.da(10),              bg = Function.fg.da(MAGIC_NUMBER),              gui = "standout" },
-    CmpItemKindConstructor   { fg = sym"@constructor".fg.da(10),     bg = sym"@constructor".fg.da(MAGIC_NUMBER),     gui = "standout" },
-    CmpItemKindField         { fg = sym"@variable.member".fg.da(10), bg = sym"@variable.member".fg.da(MAGIC_NUMBER), gui = "standout" },
-    CmpItemKindVariable      { fg = MsgArea.fg.da(10),               bg = MsgArea.fg.da(MAGIC_NUMBER),               gui = "standout" },
-    CmpItemKindClass         { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindInterface     { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindModule        { fg = sym"@module".fg.da(10),          bg = sym"@module".fg.da(MAGIC_NUMBER),          gui = "standout" },
-    CmpItemKindProperty      { fg = sym"@property".fg.da(10),        bg = sym"@property".fg.da(MAGIC_NUMBER),        gui = "standout" },
-    CmpItemKindUnit          { fg = Number.fg.da(10),                bg = Number.fg.da(MAGIC_NUMBER),                gui = "standout" },
-    CmpItemKindValue         { fg = String.fg.da(10),                bg = String.fg.da(MAGIC_NUMBER),                gui = "standout" },
-    CmpItemKindEnum          { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindKeyword       { fg = Keyword.fg.da(10),               bg = Keyword.fg.da(MAGIC_NUMBER),               gui = "standout" },
-    CmpItemKindSnippet       { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
-    CmpItemKindColor         { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
-    CmpItemKindFile          { fg = Directory.fg.da(10),             bg = Directory.fg.da(MAGIC_NUMBER),             gui = "standout" },
-    CmpItemKindReference     { fg = Special.fg.da(10),               bg = Special.fg.da(MAGIC_NUMBER),               gui = "standout" },
-    CmpItemKindFolder        { fg = Directory.fg.da(10),             bg = Directory.fg.da(MAGIC_NUMBER),             gui = "standout" },
-    CmpItemKindEnumMember    { fg = Constant.fg.da(10),              bg = Constant.fg.da(MAGIC_NUMBER),              gui = "standout" },
-    CmpItemKindConstant      { fg = Constant.fg.da(10),              bg = Constant.fg.da(MAGIC_NUMBER),              gui = "standout" },
-    CmpItemKindStruct        { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindEvent         { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindOperator      { fg = Operator.fg.da(10),              bg = Operator.fg.da(MAGIC_NUMBER),              gui = "standout" },
-    CmpItemKindTypeParameter { fg = Type.fg.da(10),                  bg = Type.fg.da(MAGIC_NUMBER),                  gui = "standout" },
-    CmpItemKindCopilot       { fg = String.fg.da(10),                bg = String.fg.da(MAGIC_NUMBER),                gui = "standout" },
+    CmpItemKindText          { fg = Normal.fg.da(MAGIC_NUMBER),                bg = Normal.fg.li(20),                gui = "standout" },
+    CmpItemKindMethod        { fg = sym"@method".fg.da(MAGIC_NUMBER),          bg = sym"@method".fg.li(20),          gui = "standout" },
+    CmpItemKindFunction      { fg = Function.fg.da(MAGIC_NUMBER),              bg = Function.fg.li(20),              gui = "standout" },
+    CmpItemKindConstructor   { fg = sym"@constructor".fg.da(MAGIC_NUMBER),     bg = sym"@constructor".fg.li(20),     gui = "standout" },
+    CmpItemKindField         { fg = sym"@variable.member".fg.da(MAGIC_NUMBER), bg = sym"@variable.member".fg.li(20), gui = "standout" },
+    CmpItemKindVariable      { fg = Identifier.fg.da(MAGIC_NUMBER),            bg = Identifier.fg.li(20),            gui = "standout" },
+    CmpItemKindClass         { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindInterface     { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindModule        { fg = sym"@module".fg.da(MAGIC_NUMBER),          bg = sym"@module".fg.li(20),          gui = "standout" },
+    CmpItemKindProperty      { fg = sym"@property".fg.da(MAGIC_NUMBER),        bg = sym"@property".fg.li(20),        gui = "standout" },
+    CmpItemKindUnit          { fg = Number.fg.da(MAGIC_NUMBER),                bg = Number.fg.li(20),                gui = "standout" },
+    CmpItemKindValue         { fg = String.fg.da(MAGIC_NUMBER),                bg = String.fg.li(20),                gui = "standout" },
+    CmpItemKindEnum          { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindKeyword       { fg = Keyword.fg.da(MAGIC_NUMBER),               bg = Keyword.fg.li(20),               gui = "standout" },
+    CmpItemKindSnippet       { fg = Special.fg.da(MAGIC_NUMBER),               bg = Special.fg.li(20),               gui = "standout" },
+    CmpItemKindColor         { fg = Special.fg.da(MAGIC_NUMBER),               bg = Special.fg.li(20),               gui = "standout" },
+    CmpItemKindFile          { fg = Directory.fg.da(MAGIC_NUMBER),             bg = Directory.fg.li(20),             gui = "standout" },
+    CmpItemKindReference     { fg = Special.fg.da(MAGIC_NUMBER),               bg = Special.fg.li(20),               gui = "standout" },
+    CmpItemKindFolder        { fg = Directory.fg.da(MAGIC_NUMBER),             bg = Directory.fg.li(20),             gui = "standout" },
+    CmpItemKindEnumMember    { fg = Constant.fg.da(MAGIC_NUMBER),              bg = Constant.fg.li(20),              gui = "standout" },
+    CmpItemKindConstant      { fg = Constant.fg.da(MAGIC_NUMBER),              bg = Constant.fg.li(20),              gui = "standout" },
+    CmpItemKindStruct        { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindEvent         { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindOperator      { fg = Operator.fg.da(MAGIC_NUMBER),              bg = Operator.fg.li(20),              gui = "standout" },
+    CmpItemKindTypeParameter { fg = Type.fg.da(MAGIC_NUMBER),                  bg = Type.fg.li(20),                  gui = "standout" },
+    CmpItemKindCopilot       { fg = String.fg.da(MAGIC_NUMBER),                bg = String.fg.li(20),                gui = "standout" },
 
     -- DapUI
     DapUIScope                   { Special },
@@ -655,7 +669,7 @@ local theme = lush(function(injected_functions)
     -- Misc
     PortalOrange { fg = "#fd6600" },
     PortalBlue   { fg = "#0078ff" },
-    Yank         { fg = palette.oldWhite, bg = palette.purp}
+    Yank         { fg = palette.purp, bg = palette.oldWhite}
 }
 end)
 
