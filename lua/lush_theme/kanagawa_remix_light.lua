@@ -332,6 +332,7 @@ local theme = lush(function(injected_functions)
     sym"@markup.italic.markdown_inline"     { Exception }, -- *italic*
     sym"@markup.raw.markdown_inline"        { String }, -- `code`
     sym"@markup.list.markdown"              { Function }, -- + list
+    sym"@markup.heading.gitcommit"          { Title, gui = "" }, -- + list
 
     -- LSP Tokens
     sym"@lsp.type.parameter"                    { sym"@variable.parameter" },
