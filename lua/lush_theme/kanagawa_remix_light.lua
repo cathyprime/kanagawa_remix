@@ -126,7 +126,7 @@ local theme = lush(function(injected_functions)
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
     Normal         { fg = palette.sumiInk6, bg = palette.lotusWhite7 }, -- Normal text
     EndOfBuffer    { Normal, fg = palette.oldWhite }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
-    NormalFloat    { fg = palette.sumiInk3, bg = palette.lotusWhite4 }, -- Normal text in floating windows.
+    NormalFloat    { fg = palette.sumiInk3, bg = Normal.bg }, -- Normal text in floating windows.
     FloatBorder    { fg = palette.normWhite5, bg = NormalFloat.bg }, -- Border of floating windows.
     FloatTitle     { fg = palette.springViolet1, bg = NormalFloat.bg, gui = "bold" }, -- Title of floating windows.
     FloatFooter    { FloatTitle }, -- Footer of floating windows.
