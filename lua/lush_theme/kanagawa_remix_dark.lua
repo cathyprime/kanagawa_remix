@@ -123,8 +123,8 @@ local theme = lush(function(injected_functions)
     MsgSeparator   { bg = palette.sumiInk0 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk0 }, -- Normal text
-    EndOfBuffer    { Normal, fg = palette.oldWhite }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
+    Normal         { fg = palette.fujiWhite, bg = palette.sumiInk1 }, -- Normal text
+    EndOfBuffer    { Normal, fg = palette.sumiInk6 }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
     NormalFloat    { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Normal text in floating windows.
     FloatBorder    { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Border of floating windows.
     FloatTitle     { fg = palette.springViolet1, bg = palette.sumiInk0, gui = "bold" }, -- Title of floating windows.
