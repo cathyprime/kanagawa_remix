@@ -153,10 +153,10 @@ local theme = lush(function(injected_functions)
     TabLineFill    { bg = palette.lotusWhite3 }, -- Tab pages line, where there are no labels
     TabLineSel     { fg = palette.sumiInk4, bg = palette.lotusWhite5 }, -- Tab pages line, active tab page label
     Title          { fg = palette.crystalBlue, gui = "bold" }, -- Titles for output from ":set all", ":autocmd" etc.
-    Visual         { fg = palette.lotusWhite7, bg = palette.crystalBlue }, -- Visual mode selection
+    Visual         { bg = palette.lightBlue }, -- Visual mode selection
     VisualNOS      { Visual }, -- Visual mode selection when vim is "Not Owning the Selection".
     WarningMsg     { fg = palette.roninYellow }, -- Warning messages
-    Whitespace     { fg = palette.whitespace }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
+    Whitespace     { fg = palette.lotusWhite4 }, -- "nbsp", "space", "tab" and "trail" in 'listchars'
     WinSeparator   { VertSplit }, -- Separator between window splits. Inherts from |hl-VertSplit| by default, which it will replace eventually.
     WildMenu       { Pmenu }, -- Current match in 'wildmenu' completion
     WinBar         { fg = palette.sumiInk4 }, -- Window bar of current window
