@@ -92,7 +92,7 @@ local theme = lush(function(injected_functions)
     CurSearch      { fg = palette.fujiWhite, bg = palette.crystalBlue0 }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     lCursor        { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM       { Cursor }, -- Like Cursor, but used when in IME mode |CursorIM|
-    CursorLine     { bg = palette.lotusWhite3.li(2) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine     { bg = palette.lotusWhite3.li(8) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     CursorColumn   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     Directory      { fg = palette.crystalBlue }, -- Directory names (and other special names in listings)
     DiffAdd        { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
@@ -124,7 +124,7 @@ local theme = lush(function(injected_functions)
     MsgSeparator   { bg = palette.lotusWhite5 }, -- Separator for scrolled messages, `msgsep` flag of 'display'
     MoreMsg        { fg = palette.dragonBlue }, -- |more-prompt|
     NonText        { fg = palette.sumiInk6 }, -- '@' at the end of the window, characters from 'showbreak' and other characters that do not really exist in the text (e.g., ">" displayed when a double-wide character doesn't fit at the end of the line). See also |hl-EndOfBuffer|.
-    Normal         { fg = palette.sumiInk6, bg = palette.lotusWhite6.li(10).da(1) }, -- Normal text
+    Normal         { fg = palette.sumiInk6, bg = palette.lotusWhite6.li(10).da(1).de(3) }, -- Normal text
     EndOfBuffer    { Normal, fg = palette.oldWhite }, -- Filler lines (~) after the end of the buffer. By default, this is highlighted like |hl-NonText|.
     NormalFloat    { fg = palette.sumiInk3, bg = Normal.bg }, -- Normal text in floating windows.
     FloatBorder    { fg = palette.normWhite5, bg = NormalFloat.bg }, -- Border of floating windows.
@@ -417,7 +417,7 @@ local theme = lush(function(injected_functions)
     statuslineRegisterRecording   { fg = palette.lotusCyan, bg = palette.lotusRed3 },
     MiniStatuslineDevinfo         { fg = palette.crystalBlue, bg = palette.springGreen },
     MiniStatuslineBrackets        { Operator, bg = StatuslineBCommand.bg },
-    MiniStatuslineDevinfoB        { fg = palette.sumiInk4, bg = CursorLine.bg.da(5) },
+    MiniStatuslineDevinfoB        { fg = palette.sumiInk4, bg = CursorLine.bg.da(3).li(5) },
     StatusDiffAdded               { DiffAdded, bg = MiniStatuslineDevinfoB.bg },
     StatusDiffChanged             { DiffChanged, bg = MiniStatuslineDevinfoB.bg },
     StatusDiffDeleted             { DiffDeleted, bg = MiniStatuslineDevinfoB.bg },
