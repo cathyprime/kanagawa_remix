@@ -161,6 +161,8 @@ local theme = lush(function(injected_functions)
     WildMenu       { Pmenu }, -- Current match in 'wildmenu' completion
     WinBar         { fg = palette.sumiInk4 }, -- Window bar of current window
     WinBarNC       { fg = palette.sumiInk4 }, -- Window bar of not-current windows
+    DiffIncoming   { fg = DiffAdd.fg, bg = DiffText.bg.li(40) },
+    DiffCurrent    { fg = DiffChange.fg, bg = DiffText.bg.li(40) },
 
     -- Common vim syntax groups used for all kinds of code and markup.
     -- Commented-out groups should chain up to their preferred (*) group
