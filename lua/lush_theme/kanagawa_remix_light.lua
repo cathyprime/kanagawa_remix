@@ -360,6 +360,8 @@ local theme = lush(function(injected_functions)
     NeogitDiffAddHighlight     { DiffAdded, bg = palette.dragonGreen.li(75) },
     NeogitDiffDelete           { DiffDeleted, bg = palette.dragonRed.li(75) },
     NeogitDiffDeleteHighlight  { DiffDeleted, bg = palette.dragonRed.li(75) },
+    NeogitCommitViewHeader     { DiffText },
+    NeogitHunkHeaderCursor     { NeogitHunkHeaderHighlight },
 
     -- MiniDiff
     MiniDiffSignAdd     { DiffAdd },
