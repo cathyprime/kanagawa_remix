@@ -403,7 +403,7 @@ local theme = lush(function(injected_functions)
     MiniSurround { IncSearch },
 
     -- MiniStatusline
-    StatuslineBInsert             { fg = palette.springGreen, bg = palette.lotusBlue2, gui = "bold italic" },
+    StatuslineBInsert             { fg = palette.springGreen.da(20), bg = palette.lotusBlue2.li(40), gui = "bold" },
     StatuslineBNormal             { StatuslineBInsert, fg = palette.lotusTeal3 },
     StatuslineBNormalInactive     { StatuslineBInsert, fg = StatuslineBNormal.fg },
     StatuslineBVisual             { StatuslineBInsert, fg = palette.lotusBlue6 },
