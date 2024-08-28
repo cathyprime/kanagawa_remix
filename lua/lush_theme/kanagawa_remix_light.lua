@@ -102,7 +102,7 @@ local theme = lush(function(injected_functions)
     DiffChanged    { DiffChange }, -- Diff mode: Changed line |diff.txt|
     DiffDeleted    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
     DiffRemoved    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
-    DiffText       { bg = palette.lotusWhite5 }, -- Diff mode: Changed text within a changed line |diff.txt|
+    DiffText       { bg = palette.lotusWhite5.li(50) }, -- Diff mode: Changed text within a changed line |diff.txt|
     TermCursor     { gui = "reverse" }, -- Cursor in a focused terminal
     TermCursorNC   { }, -- Cursor in an unfocused terminal
     ErrorMsg       { fg = palette.samuraiRed }, -- Error messages on the command line
@@ -353,14 +353,22 @@ local theme = lush(function(injected_functions)
     GitSignsChange { DiffChanged },
     GitSignsDelete { DiffDeleted },
 
+    NeogitDiffContextHighlight { Normal },
+    NeogitHunkHeader           { Function },
+    NeogitHunkHeaderHighlight  { Delimiter, gui = "bold" },
+    NeogitDiffAdd              { DiffAdded, bg = palette.dragonGreen.li(75) },
+    NeogitDiffAddHighlight     { DiffAdded, bg = palette.dragonGreen.li(75) },
+    NeogitDiffDelete           { DiffDeleted, bg = palette.dragonRed.li(75) },
+    NeogitDiffDeleteHighlight  { DiffDeleted, bg = palette.dragonRed.li(75) },
+
     -- MiniDiff
     MiniDiffSignAdd     { DiffAdd },
     MiniDiffSignChange  { DiffChange },
     MiniDiffSignDelete  { DiffDelete },
-    MiniDiffOverAdd     { bg = palette.dragonGreen },
-    MiniDiffOverChange  { bg = palette.dragonYellow },
-    MiniDiffOverContext { bg = palette.dragonBlue },
-    MiniDiffOverDelete  { bg = palette.dragonRed },
+    MiniDiffOverAdd     { bg = palette.dragonGreen.li(40) },
+    MiniDiffOverChange  { bg = palette.dragonYellow.li(40) },
+    MiniDiffOverContext { bg = palette.dragonBlue.li(80) },
+    MiniDiffOverDelete  { bg = palette.dragonRed.li(40) },
 
     -- Mini Hipatterns
     MiniHipatternsFixme { fg = Normal.bg, bg = DiagnosticError.fg, gui = "bold" },

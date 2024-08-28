@@ -350,6 +350,14 @@ local theme = lush(function(injected_functions)
     GitSignsChange { DiffChanged },
     GitSignsDelete { DiffDeleted },
 
+    NeogitDiffContextHighlight { Normal },
+    NeogitHunkHeader           { Function },
+    NeogitHunkHeaderHighlight  { Delimiter, gui = "bold" },
+    NeogitDiffAdd              { DiffAdded, bg = palette.winterGreen },
+    NeogitDiffAddHighlight     { DiffAdded, bg = palette.winterGreen },
+    NeogitDiffDelete           { DiffDeleted, bg = palette.winterRed },
+    NeogitDiffDeleteHighlight  { DiffDeleted, bg = palette.winterRed },
+
     -- MiniDiff
     MiniDiffSignAdd     { DiffAdd },
     MiniDiffSignChange  { DiffChange },
