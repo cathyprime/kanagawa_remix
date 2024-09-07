@@ -171,7 +171,7 @@ local theme = lush(function(injected_functions)
     --
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Comment        { fg = palette.dragonGray.da(20), gui = "italic" }, -- Any comment
+    Comment        { fg = palette.lotusPink.sa(5).li(15), gui = "italic" }, -- Any comment
 
     Constant       { fg = palette.surimiOrange.da(10), gui = "bold" }, -- (*) Any constant
     String         { fg = palette.lotusGreen2, gui = "italic" }, --   A string constant: "this is a string"
@@ -273,7 +273,7 @@ local theme = lush(function(injected_functions)
     --
     -- For more information see https://github.com/rktjmp/lush.nvim/issues/109
 
-    sym"@text.literal"                      { Comment }, -- Comment
+    sym"@text.literal"                      { String }, -- String
     sym"@text.reference"                    { Identifier }, -- Identifier
     sym"@text.title"                        { Title }, -- Title
     sym"@text.uri"                          { Underlined }, -- Underlined
@@ -338,6 +338,7 @@ local theme = lush(function(injected_functions)
     sym"@markup.raw.markdown_inline"        { String }, -- `code`
     sym"@markup.list.markdown"              { Function }, -- + list
     sym"@markup.heading.gitcommit"          { Title, gui = "" }, -- + list
+    sym"@comment.gitcommit"                 { fg = palette.dragonGray, gui = "italic" },
 
     -- LSP Tokens
     sym"@lsp.type.parameter"                    { sym"@variable.parameter" },
@@ -366,6 +367,7 @@ local theme = lush(function(injected_functions)
     NeogitDiffDeleteHighlight  { DiffDeleted, bg = DiffDeleted.fg.li(80) },
     NeogitCommitViewHeader     { DiffText },
     NeogitHunkHeaderCursor     { NeogitHunkHeaderHighlight },
+    NeogitSubtleText           { fg = palette.dragonGray, gui = "italic" },
 
     -- MiniDiff
     MiniDiffSignAdd     { DiffAdd },
