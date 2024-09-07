@@ -348,8 +348,6 @@ local theme = lush(function(injected_functions)
     sym"@lsp.type.variable.lua"                 { sym"@lsp.type.variable" },
     sym"@lsp.mod.readonly"                      { Constant },
     sym"@lsp.typemod.variable.global"           { Constant },
-    sym"@lsp.typemod.method.defaultLibrary"     { Function },
-    sym"@lsp.typemod.function.defaultLibrary"   { Function },
     sym"@lsp.typemod.keyword.documentation.lua" { Special },
 
     -- Plugins
