@@ -91,7 +91,7 @@ local theme = lush(function(injected_functions)
     CurSearch      { fg = palette.fujiWhite, bg = palette.crystalBlue0 }, -- Highlighting a search pattern under the cursor (see 'hlsearch')
     lCursor        { }, -- Character under the cursor when |language-mapping| is used (see 'guicursor')
     CursorIM       { Cursor }, -- Like Cursor, but used when in IME mode |CursorIM|
-    CursorLine     { bg = palette.lotusWhite3.li(30) }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
+    CursorLine     { bg = palette.lotusWhite3.li(30), fg = Normal.fg }, -- Screen-line at the cursor, when 'cursorline' is set. Low-priority if foreground (ctermfg OR guifg) is not set.
     CursorColumn   { CursorLine }, -- Screen-column at the cursor, when 'cursorcolumn' is set.
     Directory      { fg = palette.crystalBlue }, -- Directory names (and other special names in listings)
     DiffAdd        { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
@@ -180,7 +180,8 @@ local theme = lush(function(injected_functions)
     Boolean        { fg = palette.surimiOrange.da(20) }, --   A boolean constant: TRUE, false
     Float          { Number }, --   A floating point constant: 2.3e10
 
-    Identifier     { fg = palette.dragonOrange.da(10) }, -- (*) Any variable name
+    Identifier     { fg = Normal.fg }, -- (*) Any variable name
+    Property       { fg = palette.dragonOrange.da(10) },
     Function       { fg = palette.lotusBlue5.sa(300) }, --   Function name (also: methods for classes)
 
     Keyword        { fg = palette.purp, gui = "italic" }, --   any other keyword
@@ -295,13 +296,13 @@ local theme = lush(function(injected_functions)
     sym"@boolean"                           { Boolean }, -- Boolean
     sym"@float"                             { Float }, -- Float
     sym"@function"                          { Function }, -- Function,
+    sym"@method"                            { Function }, -- Function
     sym"@function.call.lua"                 { Function }, -- Function,
     sym"@function.builtin"                  { Function, gui = "italic" }, -- Special
     sym"@function.macro"                    { Macro }, -- Macro
-    sym"@parameter"                         { fg = Normal.fg }, -- Identifier
-    sym"@method"                            { Function }, -- Function
-    sym"@field"                             { Identifier }, -- Identifier
-    sym"@property"                          { Identifier }, -- Identifier
+    sym"@parameter"                         { Identifier }, -- Identifier
+    sym"@field"                             { Property }, -- Property
+    sym"@property"                          { Property }, -- Property
     sym"@constructor"                       { Function, gui = "italic" }, -- Special
     sym"@conditional"                       { Conditional }, -- Conditional
     sym"@repeat"                            { Repeat }, -- Repeat
@@ -312,15 +313,15 @@ local theme = lush(function(injected_functions)
     sym"@keyword.label"                     { Label }, -- Label
     sym"@keyword.return"                    { fg = PreProc.fg.da(10), gui = "italic" }, -- Keyword
     sym"@keyword.import"                    { PreProc, gui = "italic" }, -- Keyword
-    sym"@namespace"                         { fg = Normal.fg, gui = "italic" }, -- Identifierkana
+    sym"@namespace"                         { Identifier, gui = "italic" }, -- Identifier
     sym"@module"                            { sym"@namespace" }, -- Tag
     sym"@operator"                          { Operator }, -- Operator
     sym"@keyword.operator"                  { Operator }, -- Keyword
     sym"@exception"                         { Exception }, -- Exception
-    sym"@variable"                          { fg = Normal.fg }, -- Identifier
-    sym"@variable.parameter"                { fg = Normal.fg }, -- Identifier
+    sym"@variable"                          { Identifier }, -- Identifier
+    sym"@variable.parameter"                { sym"@parameter" }, -- Identifier
     sym"@variable.builtin"                  { sym"@keyword", gui = "italic" },
-    sym"@variable.member"                   { Identifier },
+    sym"@variable.member"                   { Property },
     sym"@type"                              { Type }, -- Type
     sym"@type.builtin"                      { Type, gui = "italic" }, -- Type
     sym"@type.definition"                   { Typedef }, -- Typedef
