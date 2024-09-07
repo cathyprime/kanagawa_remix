@@ -160,6 +160,8 @@ local theme = lush(function(injected_functions)
     WildMenu       { Pmenu }, -- Current match in 'wildmenu' completion
     WinBar         { fg = palette.oldWhite }, -- Window bar of current window
     WinBarNC       { fg = palette.oldWhite }, -- Window bar of not-current windows
+    DiffIncoming   { fg = DiffAdd.fg, bg = DiffText.bg.da(40) },
+    DiffCurrent    { fg = DiffChange.fg, bg = DiffText.bg.da(40) },
 
     -- Common vim syntax groups used for all kinds of code and markup.
     -- Commented-out groups should chain up to their preferred (*) group
@@ -181,12 +183,12 @@ local theme = lush(function(injected_functions)
     Identifier     { fg = palette.carpYellow }, -- (*) Any variable name
     Function       { fg = palette.crystalBlue }, --   Function name (also: methods for classes)
 
-    Statement      { fg = palette.oniViolet, gui = "bold" }, -- (*) Any statement
-    Conditional    { Statement }, --   if, then, else, endif, switch, etc.
-    Repeat         { Statement }, --   for, do, while, etc.
-    Label          { Statement }, --   case, default, etc.
-    Operator       { fg = palette.boatYellow2 }, --   "sizeof", "+", "*", etc.
     Keyword        { fg = palette.oniViolet, gui = "italic" }, --   any other keyword
+    Statement      { Keyword }, -- (*) Any statement
+    Conditional    { Keyword }, --   if, then, else, endif, switch, etc.
+    Repeat         { Keyword }, --   for, do, while, etc.
+    Label          { Keyword }, --   case, default, etc.
+    Operator       { fg = palette.boatYellow2 }, --   "sizeof", "+", "*", etc.
     Exception      { fg = palette.waveRed }, --   try, catch, throw
 
     PreProc        { fg = palette.waveRed }, -- (*) Generic Preprocessor
@@ -279,7 +281,7 @@ local theme = lush(function(injected_functions)
     sym"@comment"                           { Comment }, -- Comment
     sym"@punctuation"                       { Delimiter }, -- Delimiter
     sym"@constant"                          { Constant }, -- Constant
-    sym"@constant.builtin"                  { Constant }, -- Special
+    sym"@constant.builtin"                  { Constant, gui = "italic bold" }, -- Special
     sym"@constant.macro"                    { Define }, -- Define
     sym"@define"                            { Define }, -- Define
     sym"@macro"                             { Macro }, -- Macro
@@ -294,9 +296,9 @@ local theme = lush(function(injected_functions)
     sym"@float"                             { Float }, -- Float
     sym"@function"                          { Function }, -- Function,
     sym"@function.call.lua"                 { Function }, -- Function,
-    sym"@function.builtin"                  { Special }, -- Special
+    sym"@function.builtin"                  { Function, gui = "italic" }, -- Special
     sym"@function.macro"                    { Macro }, -- Macro
-    sym"@parameter"                         { Identifier }, -- Identifier
+    sym"@parameter"                         { fg = Normal.fg }, -- Identifier
     sym"@method"                            { Function }, -- Function
     sym"@field"                             { Identifier }, -- Identifier
     sym"@property"                          { Identifier }, -- Identifier
@@ -304,27 +306,30 @@ local theme = lush(function(injected_functions)
     sym"@conditional"                       { Conditional }, -- Conditional
     sym"@repeat"                            { Repeat }, -- Repeat
     sym"@label"                             { Label }, -- Label
-    sym"@operator"                          { Operator }, -- Operator
     sym"@keyword"                           { Keyword }, -- Keyword
+    sym"@keyword.conditional"               { Conditional }, -- Conditional
+    sym"@keyword.repeat"                    { Repeat }, -- Repeat
+    sym"@keyword.label"                     { Label }, -- Label
+    sym"@keyword.return"                    { fg = PreProc.fg.da(10), gui = "italic" }, -- Keyword
+    sym"@keyword.import"                    { PreProc, gui = "italic" }, -- Keyword
+    sym"@namespace"                         { fg = Normal.fg, gui = "italic" }, -- Identifierkana
+    sym"@module"                            { sym"@namespace" }, -- Tag
+    sym"@operator"                          { Operator }, -- Operator
     sym"@keyword.operator"                  { Operator }, -- Keyword
     sym"@exception"                         { Exception }, -- Exception
     sym"@variable"                          { fg = Normal.fg }, -- Identifier
-    sym"@variable.parameter"                { fg = Identifier.fg }, -- Identifier
-    sym"@variable.builtin"                  { PreProc },
+    sym"@variable.parameter"                { fg = Normal.fg }, -- Identifier
+    sym"@variable.builtin"                  { sym"@keyword", gui = "italic" },
     sym"@variable.member"                   { Identifier },
     sym"@type"                              { Type }, -- Type
     sym"@type.builtin"                      { Type, gui = "italic" }, -- Type
     sym"@type.definition"                   { Typedef }, -- Typedef
     sym"@storageclass"                      { StorageClass }, -- StorageClass
     sym"@structure"                         { Structure }, -- Structure
-    sym"@keyword.return"                    { fg = palette.peachRed.da(10), gui = "italic" }, -- Keyword
-    sym"@keyword.import"                    { PreProc, gui = "italic" }, -- Keyword
-    sym"@namespace"                         { fg = Normal.fg, gui = "italic" }, -- Identifierkana
     sym"@include"                           { Include }, -- Include
     sym"@preproc"                           { PreProc }, -- PreProc
     sym"@debug"                             { Debug }, -- Debug
     sym"@tag"                               { Tag }, -- Tag
-    sym"@module"                            { sym"@namespace" }, -- Tag
     sym"@constructor.lua"                   { Keyword },
     sym"@markup.link.url.markdown_inline"   { }, -- (url)
     sym"@markup.link.label.markdown_inline" { Identifier }, -- [label]
