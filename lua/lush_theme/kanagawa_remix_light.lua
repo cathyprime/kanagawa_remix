@@ -171,7 +171,7 @@ local theme = lush(function(injected_functions)
     --
     -- Uncomment and edit if you want more specific syntax highlighting.
 
-    Comment        { fg = palette.dragonGray, gui = "italic" }, -- Any comment
+    Comment        { fg = palette.dragonGray.da(20), gui = "italic" }, -- Any comment
 
     Constant       { fg = palette.surimiOrange.da(10), gui = "bold" }, -- (*) Any constant
     String         { fg = palette.lotusGreen2, gui = "italic" }, --   A string constant: "this is a string"
