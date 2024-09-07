@@ -279,54 +279,54 @@ local theme = lush(function(injected_functions)
     sym"@comment"                           { Comment }, -- Comment
     sym"@punctuation"                       { Delimiter }, -- Delimiter
     sym"@constant"                          { Constant }, -- Constant
-    sym"@constant.builtin"                  { Special }, -- Special
+    sym"@constant.builtin"                  { Constant }, -- Special
     sym"@constant.macro"                    { Define }, -- Define
     sym"@define"                            { Define }, -- Define
     sym"@macro"                             { Macro }, -- Macro
     sym"@string"                            { String }, -- String
     sym"@string.regexp"                     { Operator }, -- String
     sym"@string.escape"                     { Operator }, -- String
-    sym"@string.escape"                     { SpecialChar }, -- SpecialChar
     sym"@string.special"                    { SpecialChar }, -- SpecialChar
     sym"@character"                         { Character }, -- Character
     sym"@character.special"                 { SpecialChar }, -- SpecialChar
     sym"@number"                            { Number }, -- Number
     sym"@boolean"                           { Boolean }, -- Boolean
     sym"@float"                             { Float }, -- Float
-    sym"@function"                          { Function }, -- Function,,
-    sym"@function.call.lua"                 { Function }, -- Function,,
+    sym"@function"                          { Function }, -- Function,
+    sym"@function.call.lua"                 { Function }, -- Function,
     sym"@function.builtin"                  { Special }, -- Special
     sym"@function.macro"                    { Macro }, -- Macro
     sym"@parameter"                         { Identifier }, -- Identifier
     sym"@method"                            { Function }, -- Function
     sym"@field"                             { Identifier }, -- Identifier
     sym"@property"                          { Identifier }, -- Identifier
-    sym"@constructor"                       { Special }, -- Special
+    sym"@constructor"                       { Function, gui = "italic" }, -- Special
     sym"@conditional"                       { Conditional }, -- Conditional
     sym"@repeat"                            { Repeat }, -- Repeat
     sym"@label"                             { Label }, -- Label
     sym"@operator"                          { Operator }, -- Operator
     sym"@keyword"                           { Keyword }, -- Keyword
     sym"@keyword.operator"                  { Operator }, -- Keyword
-    sym"@keyword.return"                    { fg = palette.peachRed, gui = "italic" }, -- Keyword
-    sym"@keyword.import.cpp"                { PreProc }, -- Keyword
     sym"@exception"                         { Exception }, -- Exception
     sym"@variable"                          { fg = Normal.fg }, -- Identifier
-    sym"@variable.parameter"                { fg = palette.oniViolet2 }, -- Identifier
+    sym"@variable.parameter"                { fg = Identifier.fg }, -- Identifier
     sym"@variable.builtin"                  { PreProc },
     sym"@variable.member"                   { Identifier },
     sym"@type"                              { Type }, -- Type
+    sym"@type.builtin"                      { Type, gui = "italic" }, -- Type
     sym"@type.definition"                   { Typedef }, -- Typedef
     sym"@storageclass"                      { StorageClass }, -- StorageClass
     sym"@structure"                         { Structure }, -- Structure
-    sym"@namespace"                         { Identifier }, -- Identifier
+    sym"@keyword.return"                    { fg = palette.peachRed.da(10), gui = "italic" }, -- Keyword
+    sym"@keyword.import"                    { PreProc, gui = "italic" }, -- Keyword
+    sym"@namespace"                         { fg = Normal.fg, gui = "italic" }, -- Identifierkana
     sym"@include"                           { Include }, -- Include
     sym"@preproc"                           { PreProc }, -- PreProc
     sym"@debug"                             { Debug }, -- Debug
     sym"@tag"                               { Tag }, -- Tag
-    sym"@module"                            { Structure }, -- Tag
+    sym"@module"                            { sym"@namespace" }, -- Tag
     sym"@constructor.lua"                   { Keyword },
-    sym"@markup.link.url.markdown_inline"   { Special }, -- (url)
+    sym"@markup.link.url.markdown_inline"   { }, -- (url)
     sym"@markup.link.label.markdown_inline" { Identifier }, -- [label]
     sym"@markup.italic.markdown_inline"     { Exception }, -- *italic*
     sym"@markup.raw.markdown_inline"        { String }, -- `code`
@@ -335,16 +335,17 @@ local theme = lush(function(injected_functions)
 
     -- LSP Tokens
     sym"@lsp.type.parameter"                    { sym"@variable.parameter" },
+    sym"@lsp.type.namespace"                    { sym"@namespace" },
+    sym"@lsp.type.keyword"                      { },
     sym"@lsp.type.variable"                     { },
     sym"@lsp.type.variable.lua"                 { sym"@lsp.type.variable" },
     sym"@lsp.mod.readonly"                      { Constant },
     sym"@lsp.typemod.variable.global"           { Constant },
-    sym"@lsp.typemod.method.defaultLibrary"     { Special },
-    sym"@lsp.typemod.function.defaultLibrary"   { Special },
+    sym"@lsp.typemod.method.defaultLibrary"     { Function },
+    sym"@lsp.typemod.function.defaultLibrary"   { Function },
     sym"@lsp.typemod.keyword.documentation.lua" { Special },
 
     -- Plugins
-
     -- Gitsigns
     GitSignsAdd    { DiffAdded },
     GitSignsChange { DiffChanged },
@@ -353,16 +354,18 @@ local theme = lush(function(injected_functions)
     NeogitDiffContextHighlight { Normal },
     NeogitHunkHeader           { Function },
     NeogitHunkHeaderHighlight  { Delimiter, gui = "bold" },
-    NeogitDiffAdd              { DiffAdded, bg = palette.winterGreen },
-    NeogitDiffAddHighlight     { DiffAdded, bg = palette.winterGreen },
-    NeogitDiffDelete           { DiffDeleted, bg = palette.winterRed },
-    NeogitDiffDeleteHighlight  { DiffDeleted, bg = palette.winterRed },
+    NeogitDiffAdd              { DiffAdded, bg = DiffAdded.fg.da(60) },
+    NeogitDiffAddHighlight     { DiffAdded, bg = DiffAdded.fg.da(60) },
+    NeogitDiffDelete           { DiffDeleted, bg = DiffDeleted.fg.da(60) },
+    NeogitDiffDeleteHighlight  { DiffDeleted, bg = DiffDeleted.fg.da(60) },
+    NeogitCommitViewHeader     { DiffText },
+    NeogitHunkHeaderCursor     { NeogitHunkHeaderHighlight },
 
     -- MiniDiff
     MiniDiffSignAdd     { DiffAdd },
     MiniDiffSignChange  { DiffChange },
-    MiniDiffSignDelete  { DiffDelete },
     MiniDiffOverAdd     { bg = palette.winterGreen },
+    MiniDiffSignDelete  { DiffDelete },
     MiniDiffOverChange  { bg = palette.winterYellow },
     MiniDiffOverContext { bg = palette.winterBlue },
     MiniDiffOverDelete  { bg = palette.winterRed },

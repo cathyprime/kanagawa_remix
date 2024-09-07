@@ -175,14 +175,14 @@ local theme = lush(function(injected_functions)
     Comment        { fg = palette.dragonGray, gui = "italic" }, -- Any comment
 
     Constant       { fg = palette.surimiOrange.da(10), gui = "bold" }, -- (*) Any constant
-    String         { fg = palette.lotusGreen2 }, --   A string constant: "this is a string"
-    Character      { String }, --   A character constant: 'c', '\n'
+    String         { fg = palette.lotusGreen2, gui = "italic" }, --   A string constant: "this is a string"
+    Character      { String, gui = "" }, --   A character constant: 'c', '\n'
     Number         { fg = palette.waveRed }, --   A number constant: 234, 0xff
     Boolean        { fg = palette.surimiOrange, gui = "bold"  }, --   A boolean constant: TRUE, false
     Float          { Number }, --   A floating point constant: 2.3e10
 
     Identifier     { fg = palette.dragonOrange.da(10) }, -- (*) Any variable name
-    Function       { fg = palette.crystalBlue.hue(300).li(30).da(35) }, --   Function name (also: methods for classes)
+    Function       { fg = palette.lotusBlue5.sa(300) }, --   Function name (also: methods for classes)
 
     Statement      { fg = palette.oniViolet, gui = "bold" }, -- (*) Any statement
     Conditional    { Statement }, --   if, then, else, endif, switch, etc.
@@ -198,7 +198,7 @@ local theme = lush(function(injected_functions)
     Macro          { PreProc }, --   Same as Define
     PreCondit      { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
-    Type           { fg = palette.crystalBlue.hue(161).saturation(34).lightness(38).da(10) }, -- (*) int, long, char, etc.
+    Type           { fg = palette.crystalBlue.hue(161).saturation(34).lightness(38).da(10), gui = "nocombine" }, -- (*) int, long, char, etc.
     StorageClass   { Type }, --   static, register, volatile, etc.
     Structure      { Type }, --   struct, union, enum, etc.
     Typedef        { Type }, --   A typedef
@@ -282,54 +282,54 @@ local theme = lush(function(injected_functions)
     sym"@comment"                           { Comment }, -- Comment
     sym"@punctuation"                       { Delimiter }, -- Delimiter
     sym"@constant"                          { Constant }, -- Constant
-    sym"@constant.builtin"                  { Special }, -- Special
+    sym"@constant.builtin"                  { Constant }, -- Special
     sym"@constant.macro"                    { Define }, -- Define
     sym"@define"                            { Define }, -- Define
     sym"@macro"                             { Macro }, -- Macro
     sym"@string"                            { String }, -- String
     sym"@string.regexp"                     { Operator }, -- String
     sym"@string.escape"                     { Operator }, -- String
-    sym"@string.escape"                     { SpecialChar }, -- SpecialChar
     sym"@string.special"                    { SpecialChar }, -- SpecialChar
     sym"@character"                         { Character }, -- Character
     sym"@character.special"                 { SpecialChar }, -- SpecialChar
     sym"@number"                            { Number }, -- Number
     sym"@boolean"                           { Boolean }, -- Boolean
     sym"@float"                             { Float }, -- Float
-    sym"@function"                          { Function }, -- Function,,
-    sym"@function.call.lua"                 { Function }, -- Function,,
+    sym"@function"                          { Function }, -- Function,
+    sym"@function.call.lua"                 { Function }, -- Function,
     sym"@function.builtin"                  { Special }, -- Special
     sym"@function.macro"                    { Macro }, -- Macro
     sym"@parameter"                         { Identifier }, -- Identifier
     sym"@method"                            { Function }, -- Function
     sym"@field"                             { Identifier }, -- Identifier
     sym"@property"                          { Identifier }, -- Identifier
-    sym"@constructor"                       { Special }, -- Special
+    sym"@constructor"                       { Function, gui = "italic" }, -- Special
     sym"@conditional"                       { Conditional }, -- Conditional
     sym"@repeat"                            { Repeat }, -- Repeat
     sym"@label"                             { Label }, -- Label
     sym"@operator"                          { Operator }, -- Operator
     sym"@keyword"                           { Keyword }, -- Keyword
     sym"@keyword.operator"                  { Operator }, -- Keyword
-    sym"@keyword.return"                    { fg = palette.peachRed, gui = "italic" }, -- Keyword
-    sym"@keyword.import.cpp"                { PreProc }, -- Keyword
     sym"@exception"                         { Exception }, -- Exception
     sym"@variable"                          { fg = Normal.fg }, -- Identifier
     sym"@variable.parameter"                { fg = Identifier.fg }, -- Identifier
     sym"@variable.builtin"                  { PreProc },
     sym"@variable.member"                   { Identifier },
     sym"@type"                              { Type }, -- Type
+    sym"@type.builtin"                      { Type, gui = "italic" }, -- Type
     sym"@type.definition"                   { Typedef }, -- Typedef
     sym"@storageclass"                      { StorageClass }, -- StorageClass
     sym"@structure"                         { Structure }, -- Structure
-    sym"@namespace"                         { Identifier }, -- Identifier
+    sym"@keyword.return"                    { fg = palette.peachRed.da(10), gui = "italic" }, -- Keyword
+    sym"@keyword.import"                    { PreProc, gui = "italic" }, -- Keyword
+    sym"@namespace"                         { fg = Normal.fg, gui = "italic" }, -- Identifierkana
     sym"@include"                           { Include }, -- Include
     sym"@preproc"                           { PreProc }, -- PreProc
     sym"@debug"                             { Debug }, -- Debug
     sym"@tag"                               { Tag }, -- Tag
-    sym"@module"                            { Structure }, -- Tag
+    sym"@module"                            { sym"@namespace" }, -- Tag
     sym"@constructor.lua"                   { Keyword },
-    sym"@markup.link.url.markdown_inline"   { Special }, -- (url)
+    sym"@markup.link.url.markdown_inline"   { }, -- (url)
     sym"@markup.link.label.markdown_inline" { Identifier }, -- [label]
     sym"@markup.italic.markdown_inline"     { Exception }, -- *italic*
     sym"@markup.raw.markdown_inline"        { String }, -- `code`
@@ -338,12 +338,14 @@ local theme = lush(function(injected_functions)
 
     -- LSP Tokens
     sym"@lsp.type.parameter"                    { sym"@variable.parameter" },
+    sym"@lsp.type.namespace"                    { sym"@namespace" },
+    sym"@lsp.type.keyword"                      { },
     sym"@lsp.type.variable"                     { },
     sym"@lsp.type.variable.lua"                 { sym"@lsp.type.variable" },
     sym"@lsp.mod.readonly"                      { Constant },
     sym"@lsp.typemod.variable.global"           { Constant },
-    sym"@lsp.typemod.method.defaultLibrary"     { Special },
-    sym"@lsp.typemod.function.defaultLibrary"   { Special },
+    sym"@lsp.typemod.method.defaultLibrary"     { Function },
+    sym"@lsp.typemod.function.defaultLibrary"   { Function },
     sym"@lsp.typemod.keyword.documentation.lua" { Special },
 
     -- Plugins
@@ -356,10 +358,10 @@ local theme = lush(function(injected_functions)
     NeogitDiffContextHighlight { Normal },
     NeogitHunkHeader           { Function },
     NeogitHunkHeaderHighlight  { Delimiter, gui = "bold" },
-    NeogitDiffAdd              { DiffAdded, bg = palette.dragonGreen.li(75) },
-    NeogitDiffAddHighlight     { DiffAdded, bg = palette.dragonGreen.li(75) },
-    NeogitDiffDelete           { DiffDeleted, bg = palette.dragonRed.li(75) },
-    NeogitDiffDeleteHighlight  { DiffDeleted, bg = palette.dragonRed.li(75) },
+    NeogitDiffAdd              { DiffAdded, bg = DiffAdded.fg.li(80) },
+    NeogitDiffAddHighlight     { DiffAdded, bg = DiffAdded.fg.li(80) },
+    NeogitDiffDelete           { DiffDeleted, bg = DiffDeleted.fg.li(80) },
+    NeogitDiffDeleteHighlight  { DiffDeleted, bg = DiffDeleted.fg.li(80) },
     NeogitCommitViewHeader     { DiffText },
     NeogitHunkHeaderCursor     { NeogitHunkHeaderHighlight },
 
