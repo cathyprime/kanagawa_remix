@@ -282,7 +282,7 @@ local theme = lush(function(injected_functions)
     sym"@comment"                           { Comment }, -- Comment
     sym"@punctuation"                       { Delimiter }, -- Delimiter
     sym"@constant"                          { Constant }, -- Constant
-    sym"@constant.builtin"                  { Constant, gui = "italic bold" }, -- Special
+    sym"@constant.builtin"                  { Keyword, gui = "italic" }, -- Special
     sym"@constant.macro"                    { Define }, -- Define
     sym"@define"                            { Define }, -- Define
     sym"@macro"                             { Macro }, -- Macro
