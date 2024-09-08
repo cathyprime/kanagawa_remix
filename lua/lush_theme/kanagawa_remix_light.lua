@@ -333,7 +333,7 @@ local theme = lush(function(injected_functions)
     sym"@tag"                               { Tag }, -- Tag
     sym"@constructor.lua"                   { Keyword },
     sym"@markup.link.url.markdown_inline"   { }, -- (url)
-    sym"@markup.link.label.markdown_inline" { Identifier }, -- [label]
+    sym"@markup.link.label.markdown_inline" { Property }, -- [label]
     sym"@markup.italic.markdown_inline"     { Exception }, -- *italic*
     sym"@markup.raw.markdown_inline"        { String }, -- `code`
     sym"@markup.list.markdown"              { Function }, -- + list
