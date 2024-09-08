@@ -173,11 +173,11 @@ local theme = lush(function(injected_functions)
 
     Comment        { fg = palette.dragonOrange.da(20).sa(30), gui = "italic" }, -- Any comment
 
-    Constant       { fg = palette.surimiOrange }, -- (*) Any constant
-    String         { fg = palette.springGreen }, --   A string constant: "this is a string"
-    Character      { String }, --   A character constant: 'c', '\n'
+    Constant       { fg = palette.surimiOrange, gui = "bold" }, -- (*) Any constant
+    String         { fg = palette.springGreen, gui = "italic" }, --   A string constant: "this is a string"
+    Character      { String, gui = ""}, --   A character constant: 'c', '\n'
     Number         { fg = palette.sakuraPink }, --   A number constant: 234, 0xff
-    Boolean        { fg = palette.surimiOrange, gui = "bold"  }, --   A boolean constant: TRUE, false
+    Boolean        { fg = palette.surimiOrange }, --   A boolean constant: TRUE, false
     Float          { Number }, --   A floating point constant: 2.3e10
 
     Identifier     { fg = Normal.fg }, -- (*) Any variable name
@@ -198,7 +198,7 @@ local theme = lush(function(injected_functions)
     Macro          { PreProc }, --   Same as Define
     PreCondit      { PreProc }, --   Preprocessor #if, #else, #endif, etc.
 
-    Type           { fg = palette.waveAqua2 }, -- (*) int, long, char, etc.
+    Type           { fg = palette.waveAqua2, gui = "nocombine" }, -- (*) int, long, char, etc.
     StorageClass   { Type }, --   static, register, volatile, etc.
     Structure      { Type }, --   struct, union, enum, etc.
     Typedef        { Type }, --   A typedef
@@ -407,7 +407,7 @@ local theme = lush(function(injected_functions)
     MiniSurround { IncSearch },
 
     -- MiniStatusline
-    StatuslineBInsert             { fg = palette.springGreen, bg = palette.winterBlue },
+    StatuslineBInsert             { fg = palette.springGreen, bg = palette.winterBlue, gui = "bold" },
     StatuslineBNormal             { StatuslineBInsert, fg = palette.crystalBlue },
     StatuslineBNormalInactive     { StatuslineBInsert, fg = palette.crystalBlue },
     StatuslineBVisual             { StatuslineBInsert, fg = palette.oniViolet },
