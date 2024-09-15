@@ -97,6 +97,9 @@ local theme = lush(function(injected_functions)
     DiffAdd        { fg = palette.autumnGreen }, -- Diff mode: Added line |diff.txt|
     DiffChange     { fg = palette.autumnYellow }, -- Diff mode: Changed line |diff.txt|
     DiffDelete     { fg = palette.autumnRed }, -- Diff mode: Deleted line |diff.txt|
+    DiffAddRev     { DiffAdd, gui = "reverse" }, -- Diff mode: Added line |diff.txt|
+    DiffChangeRev  { DiffChange, gui = "reverse" }, -- Diff mode: Changed line |diff.txt|
+    DiffDeleteRev  { DiffDelete, gui = "reverse" }, -- Diff mode: Deleted line |diff.txt|
     DiffAdded      { DiffAdd }, -- Diff mode: Added line |diff.txt|
     DiffChanged    { DiffChange }, -- Diff mode: Changed line |diff.txt|
     DiffDeleted    { DiffDelete }, -- Diff mode: Deleted line |diff.txt|
