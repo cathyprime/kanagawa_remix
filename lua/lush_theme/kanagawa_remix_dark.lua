@@ -311,6 +311,7 @@ local theme = lush(function(injected_functions)
     sym"@repeat"                            { Repeat }, -- Repeat
     sym"@label"                             { Label }, -- Label
     sym"@keyword"                           { Keyword }, -- Keyword
+    sym"@keyword.vim"                       { Statement },
     sym"@keyword.conditional"               { Conditional }, -- Conditional
     sym"@keyword.repeat"                    { Repeat }, -- Repeat
     sym"@keyword.label"                     { Label }, -- Label
@@ -324,6 +325,7 @@ local theme = lush(function(injected_functions)
     sym"@variable"                          { Identifier }, -- Identifier
     sym"@variable.parameter"                { sym"@parameter" }, -- Identifier
     sym"@variable.builtin"                  { sym"@keyword", gui = "italic" },
+    sym"@variable.builtin.vim"              { Special, gui = "italic" },
     sym"@variable.member"                   { Property },
     sym"@type"                              { Type }, -- Type
     sym"@type.builtin"                      { Type, gui = "italic" }, -- Type
