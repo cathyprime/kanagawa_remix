@@ -431,6 +431,7 @@ local theme = lush(function(injected_functions)
     MiniStatuslineModeSelect      { fg = palette.lotusBlue4, bg = palette.crystalBlue, gui = "bold" },
     MiniStatuslineModeInsert      { fg = palette.sumiInk1, bg = palette.crystalBlue, gui = "bold" },
     MiniStatuslineModeReplace     { fg = palette.sumiInk1, bg = palette.lotusRed3, gui = "bold" },
+    MiniStatuslineModeDebug       { fg = palette.oldWhite, bg = palette.lotusRed3, gui = "bold" },
     MiniStatuslineModeCommand     { fg = palette.sumiInk1, bg = palette.surimiOrange, gui = "bold" },
     MiniStatuslineModeOther       { fg = palette.oldWhite, bg = palette.lotusBlue5, gui = "bold" },
     MiniStatuslineModeTerminal    { fg = palette.carpYellow, bg = palette.sumiInk1, gui = "bold" },
