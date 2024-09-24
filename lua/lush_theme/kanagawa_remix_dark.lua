@@ -547,6 +547,12 @@ local theme = lush(function(injected_functions)
     HydraTitle    { FloatTitle },
     HydraFooter   { FloatFooter },
 
+    -- Multicursor
+    MultiCursorCursor         { Substitute },
+    MultiCursorVisual         { Visual },
+    MultiCursorDisabledCursor { Visual },
+    MultiCursorDisabledVisual { Visual },
+
     -- checkhealth
     healthError   { DiagnosticError },
     healthSuccess { DiagnosticOk },
