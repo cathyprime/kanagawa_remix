@@ -117,9 +117,9 @@ local theme = lush(function(injected_functions)
     LineNr         { fg = palette.sumiInk6 }, -- Line number for ":number" and ":#" commands, and when 'number' or 'relativenumber' option is set.
     LineNrAbove    { LineNr }, -- Line number for when the 'relativenumber' option is set, above the cursor line
     LineNrBelow    { LineNr }, -- Line number for when the 'relativenumber' option is set, below the cursor line
-    CursorLineNr   { fg = palette.roninYellow.da(20), gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
-    CursorLineFold { FoldColumn }, -- Like FoldColumn when 'cursorline' is set for the cursor line
-    CursorLineSign { SignColumn }, -- Like SignColumn when 'cursorline' is set for the cursor line
+    CursorLineNr   { bg = palette.lotusPink.sa(5).li(50), gui = "bold" }, -- Like LineNr when 'cursorline' or 'relativenumber' is set for the cursor line.
+    CursorLineFold { CursorLineNr }, -- Like FoldColumn when 'cursorline' is set for the cursor line
+    CursorLineSign { CursorLineNr }, -- Like SignColumn when 'cursorline' is set for the cursor line
     MatchParen     { fg = palette.roninYellow, gui = "bold" }, -- Character under the cursor or just before it, if it is a paired bracket, and its match. |pi_paren.txt|
     ModeMsg        { fg = palette.roninYellow, gui = "bold" }, -- 'showmode' message (e.g., "-- INSERT -- ")
     MsgArea        { fg = palette.sumiInk4 }, -- Area for messages and cmdline
@@ -463,7 +463,7 @@ local theme = lush(function(injected_functions)
     TelescopePreviewBorder   { fg = palette.normWhite1 },
     TelescopeTitle           { Title },
     TelescopeSelection       { CursorLine },
-    TelescopeSelectionCaret  { CursorLineNr },
+    TelescopeSelectionCaret  { fg = palette.roninYellow.da(20), gui = "bold" },
     TelescopeResultsClass    { Structure },
     TelescopeResultsStruct   { Structure },
     TelescopeResultsField    { sym"@field" },
