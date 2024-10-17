@@ -313,6 +313,7 @@ local theme = lush(function(injected_functions)
     sym"@keyword"                           { Keyword }, -- Keyword
     sym"@keyword.vim"                       { Statement },
     sym"@keyword.conditional"               { Conditional }, -- Conditional
+    sym"@keyword.conditional.ternary"       { Operator }, -- Conditional
     sym"@keyword.repeat"                    { Repeat }, -- Repeat
     sym"@keyword.label"                     { Label }, -- Label
     sym"@keyword.return"                    { fg = PreProc.fg.da(10), gui = "italic" }, -- Keyword
