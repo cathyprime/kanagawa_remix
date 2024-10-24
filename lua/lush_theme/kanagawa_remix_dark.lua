@@ -550,7 +550,7 @@ local theme = lush(function(injected_functions)
     HydraFooter   { FloatFooter },
 
     -- Multicursor
-    MultiCursorCursor         { Substitute },
+    MultiCursorCursor         { fg = Normal.bg, bg = Normal.fg },
     MultiCursorVisual         { Visual },
     MultiCursorDisabledCursor { Visual },
     MultiCursorDisabledVisual { Visual },
