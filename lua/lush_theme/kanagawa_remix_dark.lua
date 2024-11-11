@@ -312,6 +312,7 @@ local theme = lush(function(injected_functions)
     sym"@label"                             { Label }, -- Label
     sym"@keyword"                           { Keyword }, -- Keyword
     sym"@keyword.vim"                       { Statement },
+    sym"@keyword.nullptr"                   { Keyword, gui = "italic nocombine" },
     sym"@keyword.conditional"               { Conditional }, -- Conditional
     sym"@keyword.conditional.ternary"       { Operator }, -- Conditional
     sym"@keyword.repeat"                    { Repeat }, -- Repeat
