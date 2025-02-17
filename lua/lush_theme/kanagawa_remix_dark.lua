@@ -363,6 +363,7 @@ local theme = lush(function(injected_functions)
     GitSignsChange { DiffChanged },
     GitSignsDelete { DiffDeleted },
 
+    -- Neogit
     NeogitDiffContextHighlight { Normal },
     NeogitHunkHeader           { Function },
     NeogitHunkHeaderHighlight  { Delimiter, gui = "bold" },
@@ -600,6 +601,9 @@ local theme = lush(function(injected_functions)
     MultiCursorDisabledCursor { Visual },
     MultiCursorDisabledVisual { Visual },
 
+    -- Snacks
+    SnacksNotifierMinimal     { fg = Normal.fg, bg = MiniStatuslineBrackets.bg.li(20) },
+
     -- checkhealth
     healthError   { DiagnosticError },
     healthSuccess { DiagnosticOk },
@@ -608,7 +612,7 @@ local theme = lush(function(injected_functions)
     -- Misc
     PortalOrange { fg = "#fd6600" },
     PortalBlue   { fg = "#0078ff" },
-    Yank         { fg = palette.oldWhite, bg = palette.purp}
+    Yank         { fg = palette.oldWhite, bg = palette.purp }
 }
 end)
 
