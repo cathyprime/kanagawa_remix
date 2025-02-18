@@ -149,7 +149,7 @@ local theme = lush(function(injected_functions)
     SpellCap       { sp = palette.roninYellow, gui = "undercurl" }, -- Word that should start with a capital. |spell| Combined with the highlighting used otherwise.
     SpellLocal     { sp = palette.roninYellow, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is used in another region. |spell| Combined with the highlighting used otherwise.
     SpellRare      { sp = palette.roninYellow, gui = "undercurl" }, -- Word that is recognized by the spellchecker as one that is hardly ever used. |spell| Combined with the highlighting used otherwise.
-    StatusLine     { fg = palette.oldWhite, bg = palette.sumiInk0 }, -- Status line of current window
+    StatusLine     { fg = palette.fujiWhite, bg = CursorLine.bg }, -- Status line of current window
     StatusLineNC   { fg = palette.sumiInk6, bg = palette.sumiInk0 }, -- Status lines of not-current windows. Note: If this is equal to "StatusLine" Vim will use "^^^" in the status line of the current window.
     TabLine        { fg = palette.springViolet1, bg = palette.sumiInk0 }, -- Tab pages line, not active tab page label
     TabLineFill    { bg = palette.sumiInk3 }, -- Tab pages line, where there are no labels
@@ -603,6 +603,9 @@ local theme = lush(function(injected_functions)
 
     -- Snacks
     SnacksNotifierMinimal     { fg = Normal.fg, bg = MiniStatuslineBrackets.bg.li(20) },
+
+    -- Noice
+    NoiceCmdline { MiniStatuslineDevinfoB },
 
     -- checkhealth
     healthError   { DiagnosticError },
