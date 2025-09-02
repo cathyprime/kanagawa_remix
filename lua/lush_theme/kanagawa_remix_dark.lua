@@ -379,10 +379,10 @@ local theme = lush(function(injected_functions)
     MiniDiffSignAdd     { DiffAdd },
     MiniDiffSignChange  { DiffChange },
     MiniDiffSignDelete  { DiffDelete },
-    MiniDiffOverAdd     { bg = palette.winterGreen },
-    MiniDiffOverChange  { bg = palette.winterYellow },
-    MiniDiffOverContext { bg = palette.winterBlue },
-    MiniDiffOverDelete  { bg = palette.winterRed },
+    MiniDiffOverAdd     { bg = DiffAdd.fg.li(40) },
+    MiniDiffOverChange  { bg = DiffChange.fg.li(40) },
+    MiniDiffOverContext { bg = palette.dragonBlue.li(80) },
+    MiniDiffOverDelete  { bg = DiffAdd.fg.li(40) },
 
     -- Mini Hipatterns
     MiniHipatternsFixme { fg = Normal.bg, bg = DiagnosticError.fg, gui = "bold" },
